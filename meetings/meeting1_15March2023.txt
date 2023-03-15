@@ -1,0 +1,159 @@
+Meeting 1 for Snakey: The Game (15 March 2023, 6.30pm SAST)
+===========================================================
+
+Attendees: Raaga Krishna, Palesa, Jesse, Willa 
+
+Agenda of the meeting: 
+
+1. Meet and Greet 
+	Raaga Krishna 				Comp Eng @ UP							Disco Bank
+	Jesse (no exp in Java)		Ele Eng and game design @ WITs			ATC
+	Willa (Java)				Java, Python @ WeThinkCode 				insurance 
+	Palesa (no exp in Java)		IT @ NMC (PE)							Massmart (mobile dev: React native, ts) 
+
+
+2. Outline of the project (game rules)
+- walls? no (whole team) 
+
+- what does snake eat? normal green dot (Palesa) 
+
+- are there multiple food items? one food item (apple); as it eats, it gets longer 
+--> can add more functionality if we have time/interest 
+
+- we can use random number generation to get the rol and col to place food item in 
+- ensure this food item is not placed on the block the snake is on 
+
+- do we want to keep a list of what the snake has eaten? 
+--> maybe (form Jesse): stream... (textstream to keep a list of what the snake is eating) 
+--> no from Willa, Palesa 
+
+- are there boosters? 
+--> no from Jesse 
+--> Willa agrees 
+
+- how will the game end? eat into game board or eat into itself? yes (whole team) 
+- or will snake make itself shorter if it eats itself? no (whole team) 
+
+- does the snake go faster if it goes long? yes (Jesse) 
+
+- can the user say how long the board can be? 
+--> standard size (Palesa) 
+--> inheritance.... Jesse 
+--> then user can change it (Willa) 
+--> abs class (Willa) 
+	implement map in different ways 
+
+- how will the points be calculated?
+--> max points based on how many blocks you occupy (Willa) 
+--> how long the snake is (Jesse) 
+ 
+- will there be a high score? 
+--> nope; we dont want databases... (Willa) 
+--> we can write to a textfile also... 
+
+- where will the snake start (top right/left or center)? 
+--> center left 
+
+- which direction will the snake be moving initially? 
+--> only moves when person clicks (acts like a Play button)
+
+- do we want to make a console game or web-based game? 
+--> framework 
+--> jframe (suggested by Palesa) 
+--> lets do research (Willa) 
+--> jframe (Jesse worked on it, in HIGHSCHOOL)
+
+- if console game, will the user use arrow keys to interact with game or 'k' for up etc etc? 
+--> wasd (w=up, a=left, s=down, d=right)  arrow keys 
+	BOTH 	Palesa, Willa, Jesse 
+	ONE		Raaga 
+--> user picks one initially 
+--> press one key at a time 
+--> final conclusion: wasp or arrow keys
+--> does Java have key events? (Palesa) 
+	Java does not have key bindind (Willa) 
+--> we have key binding (Willa) 
+	depends on events 
+	but I THINK it is difficult to access key events (Willa)
+	but depends on library
+
+
+- longer snake = move fast 
+
+- name for the game: 
+--> Snakey (suggestion from Willa) 
+--> YES (whole team)
+
+- uml 
+--> exp: Willa, 
+--> pop up screen: Jesse 
+
+- if you fill up the whole board, you win... 
+--> if you cant physically move anymore 
+--> if 8x8 map, if whole 64 blocks full, then 
+
+- main menu (Palesa)
+--> focus on game to work, then main menu (Willa) 
+
+
+
+3. List of tasks we need to do
+- model the game: which classes do we need, which variables, which functions, etc. 
+--> what Java concepts 
+
+- design the board (should be dynamic board size?)
+- create the snake we start with 
+Snake: 
+curr 
+head 
+length / number of blocks 
+blocks 
+
+- move snake 
+--> linked lists (Jesse)  
+--> functional prog 
+	biscuit work (map element to a different place) (Willa) 
+
+- ensure game ends when snake eats itself or eats board or wall 
+
+- place food in random positions 
+
+- snake can eat food --> gets longer 
+
+- animation 
+
+- Player, Food (Palesa) 
+- 8 bit music (Willa) 
+--> only if we have time 
+
+
+4. Assign tasks to each person, with a soft deadline --> postponed 
+
+
+
+5. Git repo 
+--> done (Willa) 
+
+
+
+6. Q&A
+--> Note: Monday leave (Jesse) 
+
+
+
+
+
+
+
+To do for next meeting (Thurs, 16 Mar, 6.30pm) 
+1. Research on framework 
+2. Research on key events with a framework
+3. uml planning (VERY BASIC LEVEL) 
+
+
+
+Agenda for next meeting: 
+1. Finalise uml diagram 
+2. Assign tasks to each person 
+
+
