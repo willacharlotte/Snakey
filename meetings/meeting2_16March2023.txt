@@ -1,0 +1,172 @@
+Meeting 2 for Snakey: The Game (16 March 2023, 6.30pm SAST)
+===========================================================
+
+Attendees: Raaga Krishna, Palesa, Jesse, Willa 
+
+Agenda of the meeting: 
+1. Finalise uml diagram 
+2. Assign tasks to each person 
+
+
+
+Research 
+- Jesse
+--> Spring can make screens 
+- Swing (Willa) 
+--> apparently Spring sometimes uses Swing 
+--> OG package for 
+- good idea to use Spring (Palesa) 
+- agree, but the time... (Willa) 
+- Palesa
+--> snake game is simple 
+
+
+- Willa 
+--> want to include sound :-)
+
+Conclusion: 
+- Swing (whole team) 
+--> Willa worked with it 
+
+
+
+
+UML diagram 
+- classes: 
+--> Jesse: 
+	Snake (Player) (snake_length, etc)  
+	FoodItem 
+	Board/Grid Controller 
+	Movement controller 
+	Input controller (Input --> Movement --> Snake) 
+	Stat controller 
+	- highscore (player preferences) 
+	Graphics controller 
+	Audio controller 
+	
+	
+--> Willa: 
+	(agrees with Jesse) 
+	Board interface (when you want to have more than one type of board)
+	- board customisation (ability to extend) 
+	Snake base class 
+	"I like the controllers" 
+	FoodItem interface 
+	- classes that implement that 
+	abstract class: FoodItem 
+	- spec functionality that need to implement 
+	- add to length of snake but looks different (Jesse)
+	
+	
+--> Palesa: 
+	controllers
+	- only 2 types of controller: horizontal and vertical 
+	- base interface 
+	(agree with Jesse) 
+	
+	
+--> Raaga Krishna: 
+	Board 
+	Cell 
+	Snake 
+	Food 
+	- Apple 
+
+
+
+FoodItem	Animal --> abstract
+- Apple		Cat
+- Banana 	Dog 
+
+
+interfaces cant explain behaviour (Palesa
+- can have virtual classes 
+	can override or keep it 
+- interface 
+	have to override, unless there is a default 
+	but default sucks 
+	
+can have interface constants (Willa)
+
+interface has to implement each of the methods
+abstract can have fields or methods that are pre-defined 
+- children class will have functionality by default 
+
+- 
+
+
+
+- no multiplayer (Willa)
+--> who agrees? Palesa, Raaga Krishna, Jesse
+
+
+
+Preferences 
+- Willa: sound, backend 
+- Palesa: colour (UI), classes 
+- Jesse: UI, controller, movements 
+- Raaga Krishna: normal classes 
+
+
+
+Session highscore, instead of overall highscore 
+- who agrees? 
+- or database (Palesa) 
+--> cute (Jesse) 
+
+
+Jesse: can design things :-) 
+
+
+for movements:
+- public class KeyEvent extends InputEvent
+
+
+FoodItem, Food, FoodType
+- FoodItem: 
+- Food: --> conclusion 
+- FoodType: 
+
+
+
+Things to figure out: 
+- convert Board to a UI grid (Jesse) 
+- update grid board (Jesse)
+- audio and movement (Willa) 
+- speed of update? (Willa and/or Jesse) 
+- main menu (Palesa) 
+- database (Palesa) 
+- Board, Food, Cell, Snake (Raaga Krishna) 
+- random number generation (not on snake) (Raaga Krishna)
+--> math.random to get into range for ts... hectic maths involved :-o 
+--> in Java, get .next (Willa) 
+- unit test for each function 
+--> Willa is JUnit pro ;-)
+
+
+
+Naming convention 
+- variable/methods names? board_size or boardSize? boardSize
+	killSnake()
+- package name lower case: snakey
+- class names, enum: MyClass 
+- const: MY_CONSTANT 
+
+
+
+Next meeting
+- Mon 6.30pm 
+
+we can have a virtual stand up 
+- 6.30pm 
+
+
+
+Agenda of the meeting: 
+1. Finalise uml diagram 
+2. Assign tasks to each person 
+3. Update of tasks
+
+
+
+
