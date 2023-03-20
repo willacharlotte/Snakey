@@ -63,12 +63,33 @@ public class Board {
                 checkCell.getX() >= 0 && checkCell.getY() >= 0;
     }
 
+    private void removeSnakeOffBoard(){
+        for (int i=0; i<this.board_size ; i++){
+            for (int j=0; j<this.board_size ; j++){
+                if(this.board_map[i][j].getCellType().equals(CellType.SNAKE)){
+                    System.out.println("before: " + this.board_map[i][j]);
+                    this.board_map[i][j].setCellType(CellType.NONE);
+                    System.out.println("after: " + this.board_map[i][j]);
+                }
+            }
+        }
+    }
+
+    private void addSnakeToBoard(){
+        for(Cell snake_cell : my_snake.getSnakeBlocks()){
+            this.board_map[snake_cell.getY()][snake_cell.getX()].setCellType(CellType.SNAKE);
+        }
+    }
+
     public void moveSnake(Direction direction){
         int new_y = my_snake.getHead().getY();
         int new_x = my_snake.getHead().getX();
 
         Cell old_cell = this.board_map[new_y][new_x];
-        old_cell.setCellType(CellType.NONE);
+        removeSnakeOffBoard();
+        System.out.println(this);
+
+        //old_cell.setCellType(CellType.NONE);
 
         if (direction.equals(Direction.UP)){
             System.out.println("moving up");
@@ -90,14 +111,12 @@ public class Board {
         Cell checkCell = new Cell(new_x, new_y);
         if (isValid(checkCell)){
             Cell new_head = this.board_map[new_y][new_x];
-
-            //Cell old_cell = this.board_map[new_y][new_x];
             new_head.setCellType(CellType.SNAKE);
 
-            System.out.println("new head: " + new_head);
-            //System.out.println("valid: " + isValid(new_head));
-            my_snake.setHead(new_head);
-            my_snake.moveSnake(direction);
+            // System.out.println("new head: " + new_head);
+            // my_snake.setHead(new_head);
+            my_snake.moveSnake(new_head, direction);
+            addSnakeToBoard();
         }
         else{
             old_cell.setCellType(CellType.SNAKE);

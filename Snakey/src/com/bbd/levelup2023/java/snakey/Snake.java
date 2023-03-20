@@ -7,21 +7,26 @@ import java.util.stream.Stream;
 public class Snake {
     private Cell head;
     //private Cell[] snakeBlocks;
-    private List<Cell> snakeBlocks = new ArrayList<>();
+    private final List<Cell> snakeBlocks = new ArrayList<>();
     private int length;
+    private int currentLength = 1;
     private List<Food> foodItems;
     private boolean isAlive = true;
     private Direction snakeDirection;
-    private float speed = 1;
+    private float point = 1;
 
     public Snake(){
-        this.length = 1;
+        this.length = 2;
     }
 
+    /**
+     * sets the head of the snake if the snake is alive
+     * @param head the head cell
+     */
     public void setHead(Cell head){
         if (this.isAlive){
             this.head = head;
-            //snakeBlocks.add(head);
+            snakeBlocks.add(head);
         }
     }
 
@@ -29,9 +34,24 @@ public class Snake {
         return this.head;
     }
 
-    public void moveSnake(Direction direction){
+    /**
+     * moves the snake and sets its direction
+     * @param new_cell the new cell for snake to move to
+     * @param direction the direction of the snake now
+     */
+    public void moveSnake(Cell new_cell, Direction direction){
         if (this.isAlive){
-            System.out.println("snake moves " + direction);
+            //System.out.println("snake moves " + direction + " to " + new_cell);
+            if (this.currentLength < this.length) {
+                this.snakeBlocks.add(new_cell);
+                this.head = new_cell;
+                currentLength += 1;
+            }
+            else{
+                this.snakeBlocks.clear();
+                this.setHead(new_cell);
+                currentLength = 1;
+            }
             this.snakeDirection = direction;
         }
     }
@@ -41,7 +61,6 @@ public class Snake {
     }
 
     public void killSnake(){
-        System.out.println("snake dead");
         this.isAlive = false;
     }
 
@@ -49,6 +68,11 @@ public class Snake {
         return snakeBlocks;
     }
 
+    public void eatFruit(Food fruit){
+        this.length += fruit.getLength();
+        this.point += fruit.getPoints();
+        this.foodItems.add(fruit);
+    }
 
 
     @Override
@@ -57,10 +81,10 @@ public class Snake {
                 "head=" + head +
                 ", snakeBlocks=" + snakeBlocks +
                 ", length=" + length +
+                ", currentLength=" + currentLength +
                 ", foodItems=" + foodItems +
                 ", isAlive=" + isAlive +
                 ", snakeDirection=" + snakeDirection +
-                ", speed=" + speed +
                 '}';
     }
 

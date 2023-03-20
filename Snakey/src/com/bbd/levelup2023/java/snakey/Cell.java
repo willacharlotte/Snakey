@@ -33,6 +33,10 @@ public class Cell{
         return this.y;
     }
 
+    public CellType getCellType() {
+        return cellType;
+    }
+
     public String toString(){
         //return "x: " + this.x + ", y: " + this.y;
         return "(" + this.x + ", " + this.y + ", " + this.cellType + ")";
