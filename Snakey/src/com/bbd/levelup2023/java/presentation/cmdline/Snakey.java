@@ -13,8 +13,7 @@ public class Snakey {
      * @return the created Board
      */
     public static Board createBoard(int board_size){
-        Board my_board = new Board(board_size);
-        return my_board;
+        return new Board(board_size);
     }
 
     /**

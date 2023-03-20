@@ -198,6 +198,10 @@ public class Board {
         }
     }
 
+    public boolean isSnakeMax(){
+        return this.my_snake.getSnakeBlocks().size() == this.board_size * this.board_size;
+    }
+
     public int getBoard_size() {
         return board_size;
     }

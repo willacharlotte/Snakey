@@ -20,11 +20,18 @@ public class Menu {
     private int get_board_size(){
         //Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int board_size;
+        System.out.println("===============================");
         System.out.println("Welcome to the Snakey: The Game");
-        System.out.println("Main menu");
+        System.out.println("===============================");
+        //System.out.println("Main menu");
         System.out.print("Enter a board size: ");
         board_size = this.myObj.nextInt();  // Read user input
         return board_size;
+    }
+
+    private void displayMenu(){
+        System.out.println("Choose a movement: " +
+                "UP = w, DOWN = s, LEFT = a, RIGHT = d");
     }
 
     public void newGame(){
@@ -34,21 +41,26 @@ public class Menu {
         ClearConsoleScreen.clearConsole();
         this.my_board = createBoard(board_size);
 
+        playGame();
+
+        gameEnded();
+    }
+
+    private void playGame() {
         String userInput = "";
         int replaceFood = 0;
 
-        String menu = "Snakey \n" +
-                "UP = w, DOWN = s, LEFT = a, RIGHT = d";
-        Snake my_snake = my_board.getMy_snake();
+        Snake my_snake = this.my_board.getMy_snake();
 
         while (!userInput.equals("q") && my_snake.isAlive()){
             ClearConsoleScreen.clearConsole();
+            System.out.println(this.my_board.isSnakeMax());
 
             replaceFood = addFoodToBoard(my_board, replaceFood);
 
             printGameDetails(my_board);
 
-            userInput = getUserInput(menu);
+            userInput = getUserInput();
 
             moveSnake(my_board, userInput);
 
@@ -57,8 +69,6 @@ public class Menu {
 
             replaceFood++;
         }
-
-        gameEnded();
     }
 
     public Menu(){
@@ -77,11 +87,10 @@ public class Menu {
         }
     }
 
-    private String getUserInput(String menu) {
-        String userInput;
-        System.out.println(menu);
+    private String getUserInput() {
+        displayMenu();
         System.out.print("User input: ");
-        userInput = myObj.nextLine();  // Read user input
+        String userInput = myObj.nextLine();  // Read user input
         System.out.println(userInput);
         return userInput;
     }
