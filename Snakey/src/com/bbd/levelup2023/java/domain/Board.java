@@ -7,7 +7,7 @@ import com.bbd.levelup2023.java.enums.FoodTypes;
 import java.util.Random;
 
 public class Board {
-    private int board_size = 11;
+    private int board_size;
     private Cell[][] board_map;
     private final Snake my_snake = new Snake();
     private Food my_food;
