@@ -16,7 +16,7 @@ public class Snake {
     private float point = 1;
 
     public Snake(){
-        this.length = 2;
+        this.length = 10;
     }
 
     /**
@@ -43,13 +43,11 @@ public class Snake {
         if (this.isAlive){
             //System.out.println("snake moves " + direction + " to " + new_cell);
             if (this.currentLength < this.length) {
-                System.out.println("IF");
                 this.snakeBlocks.add(new_cell);
                 this.head = new_cell;
                 currentLength += 1;
             }
             else{
-                System.out.println("ELSE");
                 this.snakeBlocks.remove(0);
                 this.snakeBlocks.add(new_cell);
                 this.head = new_cell;
@@ -68,6 +66,15 @@ public class Snake {
 
     public List<Cell> getSnakeBlocks() {
         return snakeBlocks;
+    }
+
+    public boolean containsCell(Cell new_cell){
+        for (Cell cell : this.getSnakeBlocks()){
+            if (cell.getX() == new_cell.getX() && cell.getY() == new_cell.getY()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void eatFruit(Food fruit){

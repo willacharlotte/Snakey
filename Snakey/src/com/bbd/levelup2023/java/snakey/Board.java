@@ -67,9 +67,9 @@ public class Board {
         for (int i=0; i<this.board_size ; i++){
             for (int j=0; j<this.board_size ; j++){
                 if(this.board_map[i][j].getCellType().equals(CellType.SNAKE)){
-                    System.out.println("before: " + this.board_map[i][j]);
+                    //System.out.println("before: " + this.board_map[i][j]);
                     this.board_map[i][j].setCellType(CellType.NONE);
-                    System.out.println("after: " + this.board_map[i][j]);
+                    //System.out.println("after: " + this.board_map[i][j]);
                 }
             }
         }
@@ -106,12 +106,8 @@ public class Board {
         }
 
         Cell checkCell = new Cell(new_x, new_y);
-        if (isValid(checkCell)){
+        if (isValid(checkCell) && !my_snake.containsCell(checkCell)){
             Cell new_head = this.board_map[new_y][new_x];
-            new_head.setCellType(CellType.SNAKE);
-
-            // System.out.println("new head: " + new_head);
-            // my_snake.setHead(new_head);
             my_snake.moveSnake(new_head, direction);
             addSnakeToBoard();
         }
