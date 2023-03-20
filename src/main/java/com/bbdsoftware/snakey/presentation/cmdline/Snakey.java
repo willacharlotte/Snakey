@@ -1,10 +1,7 @@
 package com.bbdsoftware.snakey.presentation.cmdline;
 
 import com.bbdsoftware.snakey.domain.Board;
-import com.bbdsoftware.snakey.domain.Snake;
 import com.bbdsoftware.snakey.enums.Direction;
-
-import java.util.Scanner;
 
 public class Snakey {
     /**
@@ -30,7 +27,6 @@ public class Snakey {
      * @param userInput the users input
      */
     public static void moveSnake(Board my_board, String userInput) {
-        /* move snake */
         switch (userInput) {
             case "w" -> my_board.moveSnake(Direction.UP);
             case "s" -> my_board.moveSnake(Direction.DOWN);

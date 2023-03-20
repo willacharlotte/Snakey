@@ -3,6 +3,7 @@ package com.bbdsoftware.snakey.presentation.cmdline;
 import com.bbdsoftware.snakey.domain.Board;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.domain.User;
 import com.bbdsoftware.snakey.utils.ClearConsoleScreen;
 
 import java.util.ArrayList;
@@ -13,12 +14,12 @@ import static com.bbdsoftware.snakey.presentation.cmdline.Snakey.*;
 
 public class Menu {
     Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-    //private final ClearConsoleScreen console = new ClearConsoleScreen();
     private Board my_board;
-    private final List<Float> highScore = new ArrayList<>();
+    //private final List<Float> highScore = new ArrayList<>();
+
+    private final List<User> users = new ArrayList<>();
 
     private int get_board_size(){
-        //Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int board_size;
         System.out.println("===============================");
         System.out.println("Welcome to the Snakey: The Game");
@@ -43,7 +44,7 @@ public class Menu {
 
         playGame();
 
-        gameEnded();
+        gameEnded(myObj);
     }
 
     private void playGame() {
@@ -71,14 +72,20 @@ public class Menu {
         }
     }
 
-    public Menu(){
+    public Menu(){ }
 
-    }
-
-    private void gameEnded(){
+    private void gameEnded(Scanner myObj){
         System.out.println("Game ended!");
-        this.highScore.add(this.my_board.getMy_snake().getScore());
-        System.out.println("High Scores: " + this.highScore);
+        //this.highScore.add(this.my_board.getMy_snake().getScore());
+
+        System.out.print("Enter your username: ");
+        String username = myObj.nextLine();  // Read user input
+        User new_user = new User(username, this.my_board.getMy_snake().getScore());
+        this.users.add(new_user);
+
+        //System.out.println("High Scores: " + this.highScore);
+        System.out.println("Highscores: " + this.users);
+
         System.out.print("Would you like to play again? (Y=yes, N=no) ");
         String userInput = myObj.nextLine();  // Read user input
         if (userInput.equals("Y")){
