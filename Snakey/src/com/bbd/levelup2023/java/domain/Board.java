@@ -56,7 +56,6 @@ public class Board {
      * @return if the cell is valid or not
      */
     private boolean isValid(Cell checkCell){
-        //System.out.println(checkCell.getX() + "," + checkCell.getY() + " \t " + (this.board_size -1));
         return checkCell.getX() < this.board_size && checkCell.getY() < this.board_size &&
                 checkCell.getX() >= 0 && checkCell.getY() >= 0;
     }
@@ -81,9 +80,7 @@ public class Board {
         for (int i=0; i<this.board_size ; i++){
             for (int j=0; j<this.board_size ; j++){
                 if(this.board_map[i][j].getCellType().equals(CellType.SNAKE)){
-                    //System.out.println("before: " + this.board_map[i][j]);
                     this.board_map[i][j].setCellType(CellType.NONE);
-                    //System.out.println("after: " + this.board_map[i][j]);
                 }
             }
         }
@@ -157,7 +154,6 @@ public class Board {
 
             // if not on snake
             while (isOnSnake(food_cell)) {
-                System.out.println("on snake");
                 int_x = rand.nextInt(this.board_size);
                 int_y = rand.nextInt(this.board_size);
                 food_cell = new Cell(int_x, int_y);
@@ -184,7 +180,6 @@ public class Board {
         for (int i=0; i<this.board_size ; i++){
             for (int j=0; j<this.board_size ; j++){
                 Cell this_cell = this.board_map[i][j];
-                //System.out.print(this.board_map[i][j] + " |");
                 if (this_cell.getCellType().equals(CellType.NONE)){
                     System.out.print('N');
                 }

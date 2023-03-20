@@ -3,11 +3,11 @@ package com.bbd.levelup2023.java.domain;
 import com.bbd.levelup2023.java.enums.Colour;
 
 public class Apple extends Food{
-    private String foodName;
-    private float score;
-    private Colour foodColour;
-    private int length;
-    private Cell foodCell;
+    private final String foodName;
+    private final float score;
+    private final Colour foodColour;
+    private final int length;
+    private final Cell foodCell;
 
     public Apple(Cell food_cell){
         this.foodName = "Apple";

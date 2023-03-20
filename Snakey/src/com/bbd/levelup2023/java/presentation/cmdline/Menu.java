@@ -1,6 +1,7 @@
 package com.bbd.levelup2023.java.presentation.cmdline;
 
 import com.bbd.levelup2023.java.domain.Board;
+import com.bbd.levelup2023.java.domain.Food;
 import com.bbd.levelup2023.java.domain.Snake;
 import com.bbd.levelup2023.java.utils.ClearConsoleScreen;
 
@@ -12,13 +13,13 @@ import static com.bbd.levelup2023.java.presentation.cmdline.Snakey.*;
 
 public class Menu {
     Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-    private final ClearConsoleScreen console = new ClearConsoleScreen();
+    //private final ClearConsoleScreen console = new ClearConsoleScreen();
     private Board my_board;
-    private List<Float> highScore = new ArrayList<>();
+    private final List<Float> highScore = new ArrayList<>();
 
     private int get_board_size(){
         //Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        int board_size = 0;
+        int board_size;
         System.out.println("Welcome to the Snakey: The Game");
         System.out.println("Main menu");
         System.out.print("Enter a board size: ");
@@ -27,10 +28,10 @@ public class Menu {
     }
 
     public void newGame(){
-        console.clearConsole();
+        ClearConsoleScreen.clearConsole();
         int board_size = get_board_size();
 
-        console.clearConsole();
+        ClearConsoleScreen.clearConsole();
         this.my_board = createBoard(board_size);
 
         String userInput = "";
@@ -41,7 +42,7 @@ public class Menu {
         Snake my_snake = my_board.getMy_snake();
 
         while (!userInput.equals("q") && my_snake.isAlive()){
-            console.clearConsole();
+            ClearConsoleScreen.clearConsole();
 
             replaceFood = addFoodToBoard(my_board, replaceFood);
 
@@ -61,7 +62,7 @@ public class Menu {
     }
 
     public Menu(){
-        newGame();
+
     }
 
     private void gameEnded(){
@@ -86,8 +87,6 @@ public class Menu {
     }
 
     private static int addFoodToBoard(Board my_board, int replaceFood) {
-        //System.out.println("replaceFood = " + replaceFood);
-        //System.out.println("add food: ");
         if(replaceFood == 0)
             addFood(my_board);
         else if (replaceFood == my_board.getBoard_size() - 1){
@@ -100,5 +99,13 @@ public class Menu {
         //System.out.println(my_board);
         my_board.printBoard();
         System.out.println("Score: " + my_board.getMy_snake().getScore());
+
+        if (!my_board.getMy_snake().getFoodItems().isEmpty()) {
+            System.out.println("Food items eaten: ");
+            for (Food food : my_board.getMy_snake().getFoodItems()) {
+                System.out.println("  " + food.getFoodName());
+            }
+        }
+
     }
 }
