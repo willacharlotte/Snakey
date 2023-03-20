@@ -29,7 +29,8 @@ public class AppRunner {
             else if (replaceFood == my_board.getBoard_size() - 1){
                 replaceFood = -1;
             }
-            System.out.println(my_board);
+            //System.out.println(my_board);
+            my_board.printBoard();
 
             System.out.println(menu);
             System.out.print("User input: ");

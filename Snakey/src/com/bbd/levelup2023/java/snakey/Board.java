@@ -172,6 +172,29 @@ public class Board {
         }
     }
 
+    public void printBoard(){
+        for (int i=0; i<this.board_size ; i++){
+            for (int j=0; j<this.board_size ; j++){
+                Cell this_cell = this.board_map[i][j];
+                //System.out.print(this.board_map[i][j] + " |");
+                if (this_cell.getCellType().equals(CellType.NONE)){
+                    System.out.print('N');
+                }
+                else if (this_cell.getCellType().equals(CellType.SNAKE)){
+                    System.out.print('S');
+                }
+                else if (this_cell.getCellType().equals(CellType.FOOD)) {
+                    System.out.print('F');
+                }
+                else {
+                    System.out.print('?');
+                }
+                System.out.print(" | ");
+            }
+            System.out.println();
+        }
+    }
+
     public int getBoard_size() {
         return board_size;
     }
