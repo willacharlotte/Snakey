@@ -1,4 +1,6 @@
-package com.bbd.levelup2023.java.snakey;
+package com.bbd.levelup2023.java.domain;
+
+import com.bbd.levelup2023.java.enums.CellType;
 
 public class Cell{
     private int x;

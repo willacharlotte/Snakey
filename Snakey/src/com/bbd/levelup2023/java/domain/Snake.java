@@ -1,4 +1,6 @@
-package com.bbd.levelup2023.java.snakey;
+package com.bbd.levelup2023.java.domain;
+
+import com.bbd.levelup2023.java.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,7 @@ public class Snake {
     private List<Food> foodItems = new ArrayList<>();
     private boolean isAlive = true;
     private Direction snakeDirection;
-    private float point = 1;
+    private float score = 1;
 
     public Snake(){
         this.length = 1;
@@ -89,10 +91,33 @@ public class Snake {
     public void eatFood(Food food){
         System.out.println("eatFood: " + food);
         this.length += food.getLength();
-        this.point += food.getPoints();
+        this.score += food.getPoints();
         this.foodItems.add(food);
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public int getCurrentLength() {
+        return currentLength;
+    }
+
+    public List<Food> getFoodItems() {
+        return foodItems;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public Direction getSnakeDirection() {
+        return snakeDirection;
+    }
+
+    public float getScore() {
+        return score;
+    }
 
     @Override
     public String toString() {
