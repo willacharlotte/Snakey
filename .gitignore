@@ -32,4 +32,4 @@ TEST*.xml
 Thumbs.db 
 
 # VSCode Files
-.vscode/*
+.vscode/
