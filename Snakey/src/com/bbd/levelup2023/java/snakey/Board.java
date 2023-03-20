@@ -1,12 +1,14 @@
 package com.bbd.levelup2023.java.snakey;
 
-
 import java.util.Arrays;
+import java.util.Random;
 
 public class Board {
     private int board_size = 11;
     private Cell[][] board_map;
     private final Snake my_snake = new Snake();
+
+    private Food my_food;
 
     public Board(){
         System.out.println("new board");
@@ -63,6 +65,14 @@ public class Board {
                 checkCell.getX() >= 0 && checkCell.getY() >= 0;
     }
 
+    private boolean isOnSnake(Cell checkCell){
+        for (Cell snake_cell : my_snake.getSnakeBlocks()){
+            if (snake_cell.getX() == checkCell.getX() && snake_cell.getY() == checkCell.getY())
+                return true;
+        }
+        return false;
+    }
+
     private void removeSnakeOffBoard(){
         for (int i=0; i<this.board_size ; i++){
             for (int j=0; j<this.board_size ; j++){
@@ -108,7 +118,14 @@ public class Board {
         Cell checkCell = new Cell(new_x, new_y);
         if (isValid(checkCell) && !my_snake.containsCell(checkCell)){
             Cell new_head = this.board_map[new_y][new_x];
-            my_snake.moveSnake(new_head, direction);
+            System.out.println("new_head: " + new_head);
+            if (new_head.getCellType().equals(CellType.NONE)) {
+                my_snake.moveSnake(new_head, direction);
+            }
+            else if (new_head.getCellType().equals(CellType.FOOD)){
+                my_snake.moveSnake(new_head, direction, my_food);
+                this.my_food = null;
+            }
             addSnakeToBoard();
         }
         else{
@@ -119,6 +136,44 @@ public class Board {
 
     public Snake getMy_snake() {
         return my_snake;
+    }
+
+    public void addFood(){
+        Random rand = new Random();
+        int int_x = rand.nextInt(this.board_size);
+        int int_y = rand.nextInt(this.board_size);
+        //int int_x = 0, int_y = 3;
+
+        Cell food_cell = new Cell(int_x, int_y);
+
+        // if not on snake
+        while (isOnSnake(food_cell)){
+            System.out.println("on snake");
+            int_x = rand.nextInt(this.board_size);
+            int_y = rand.nextInt(this.board_size);
+            food_cell = new Cell(int_x, int_y);
+        }
+
+        int foodType = rand.nextInt(FoodTypes.values().length);
+        //System.out.println(int_x + ", " + int_y + "-->" + foodType);
+        //System.out.println("Food: " + FoodTypes.values()[foodType]);
+
+        if (this.my_food != null){
+            this.board_map[int_y][int_x].setCellType(CellType.NONE);
+            this.my_food = null;
+        }
+
+        if(FoodTypes.values()[foodType].equals(FoodTypes.APPLE)){
+            Apple my_apple = new Apple(food_cell);
+            //System.out.println("Apple: " + my_apple);
+            this.my_food = my_apple;
+            this.board_map[int_y][int_x].setCellType(CellType.FOOD);
+            System.out.println("Food added to board: " + this.my_food);
+        }
+    }
+
+    public int getBoard_size() {
+        return board_size;
     }
 
     @Override
@@ -133,8 +188,9 @@ public class Board {
 
         return "Board{" +
                 "board_size=" + board_size +
-                ",\n board_map=\n" + board_map_toString +
-                ",\n my_snake=" + my_snake +
+                ", \nboard_map=" + board_map_toString +
+                ", \nmy_snake=" + my_snake +
+                ", \nmy_food=" + my_food +
                 '}';
     }
 }

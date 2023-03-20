@@ -10,13 +10,13 @@ public class Snake {
     private final List<Cell> snakeBlocks = new ArrayList<>();
     private int length;
     private int currentLength = 1;
-    private List<Food> foodItems;
+    private List<Food> foodItems = new ArrayList<>();
     private boolean isAlive = true;
     private Direction snakeDirection;
     private float point = 1;
 
     public Snake(){
-        this.length = 10;
+        this.length = 1;
     }
 
     /**
@@ -56,6 +56,27 @@ public class Snake {
         }
     }
 
+    public void moveSnake(Cell new_cell, Direction direction, Food my_food){
+        if (this.isAlive){
+            //System.out.println("snake moves " + direction + " to " + new_cell);
+            //System.out.println("YOU ATE A FOOD!!!");
+            if (this.currentLength < this.length) {
+                this.snakeBlocks.add(new_cell);
+                this.head = new_cell;
+                this.currentLength += 1;
+            }
+            else{
+                this.snakeBlocks.remove(0);
+                this.snakeBlocks.add(new_cell);
+                this.head = new_cell;
+            }
+            this.length += my_food.getLength();
+            //System.out.println("my_food.getLength(): " +  my_food.getLength());
+            this.foodItems.add(my_food);
+            this.snakeDirection = direction;
+        }
+    }
+
     public boolean getIsAlive(){
         return this.isAlive;
     }
@@ -88,11 +109,11 @@ public class Snake {
     public String toString() {
         return "Snake{" +
                 "head=" + head +
-                ", snakeBlocks=" + snakeBlocks +
-                ", length=" + length +
+                ", \nsnakeBlocks=" + snakeBlocks +
+                ", \nlength=" + length +
                 ", currentLength=" + currentLength +
-                ", foodItems=" + foodItems +
-                ", isAlive=" + isAlive +
+                ", \nfoodItems=" + foodItems +
+                ", \nisAlive=" + isAlive +
                 ", snakeDirection=" + snakeDirection +
                 '}';
     }

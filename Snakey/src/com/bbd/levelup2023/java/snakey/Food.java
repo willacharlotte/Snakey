@@ -1,6 +1,5 @@
 package com.bbd.levelup2023.java.snakey;
 
-
 public abstract class Food{
     private String foodName;
     private int points;
@@ -8,9 +7,7 @@ public abstract class Food{
     private int length;
     private Cell foodCell;
 
-    public Food(){
-        System.out.println("Food");
-    }
+    public Food(){ }
 
     public String getFoodName() {
         return foodName;
@@ -30,5 +27,16 @@ public abstract class Food{
 
     public Cell getFoodCell() {
         return foodCell;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "foodName='" + foodName + '\'' +
+                ", points=" + points +
+                ", foodColour=" + foodColour +
+                ", length=" + length +
+                ", foodCell=" + foodCell +
+                '}';
     }
 }

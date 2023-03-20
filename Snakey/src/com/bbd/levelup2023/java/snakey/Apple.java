@@ -14,9 +14,48 @@ public class Apple extends Food{
         this.length = 2;
     }
 
-    public Apple(Cell fruit_cell){
-        this();
-        this.foodCell = fruit_cell;
+    public Apple(Cell food_cell){
+        this.foodName = "Apple";
+        this.points = 1;
+        this.foodColour = Colour.RED;
+        this.length = 2;
 
+        this.foodCell = food_cell;
+    }
+
+    @Override
+    public String getFoodName() {
+        return foodName;
+    }
+
+    @Override
+    public int getPoints() {
+        return points;
+    }
+
+    @Override
+    public Colour getFoodColour() {
+        return foodColour;
+    }
+
+    @Override
+    public int getLength() {
+        return length;
+    }
+
+    @Override
+    public Cell getFoodCell() {
+        return foodCell;
+    }
+
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "foodName='" + foodName + '\'' +
+                ", points=" + points +
+                ", foodColour=" + foodColour +
+                ", length=" + length +
+                ", foodCell=" + foodCell +
+                '}';
     }
 }
