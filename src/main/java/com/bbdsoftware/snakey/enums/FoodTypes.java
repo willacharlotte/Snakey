@@ -1,4 +1,4 @@
-package com.bbd.levelup2023.java.enums;
+package com.bbdsoftware.snakey.enums;
 
 public enum FoodTypes {
     APPLE,

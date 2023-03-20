@@ -1,6 +1,6 @@
-package com.bbd.levelup2023.java.domain;
+package com.bbdsoftware.snakey.domain;
 
-import com.bbd.levelup2023.java.enums.Direction;
+import com.bbdsoftware.snakey.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.List;

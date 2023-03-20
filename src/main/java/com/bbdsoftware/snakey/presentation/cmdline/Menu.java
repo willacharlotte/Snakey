@@ -1,15 +1,15 @@
-package com.bbd.levelup2023.java.presentation.cmdline;
+package com.bbdsoftware.snakey.presentation.cmdline;
 
-import com.bbd.levelup2023.java.domain.Board;
-import com.bbd.levelup2023.java.domain.Food;
-import com.bbd.levelup2023.java.domain.Snake;
-import com.bbd.levelup2023.java.utils.ClearConsoleScreen;
+import com.bbdsoftware.snakey.domain.Board;
+import com.bbdsoftware.snakey.domain.Food;
+import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.utils.ClearConsoleScreen;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.bbd.levelup2023.java.presentation.cmdline.Snakey.*;
+import static com.bbdsoftware.snakey.presentation.cmdline.Snakey.*;
 
 public class Menu {
     Scanner myObj = new Scanner(System.in);  // Create a Scanner object

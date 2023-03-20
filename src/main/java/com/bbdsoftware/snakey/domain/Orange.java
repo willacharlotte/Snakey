@@ -1,39 +1,51 @@
-package com.bbd.levelup2023.java.domain;
+package com.bbdsoftware.snakey.domain;
 
-import com.bbd.levelup2023.java.enums.Colour;
+import com.bbdsoftware.snakey.enums.Colour;
 
-public abstract class Food{
-    private String foodName;
-    private float score;
-    private Colour foodColour;
-    private int length;
-    private Cell foodCell;
+public class Orange  extends Food{
+    private final String foodName;
+    private final float score;
+    private final Colour foodColour;
+    private final int length;
+    private final Cell foodCell;
 
-    public Food(){ }
+    public Orange(Cell food_cell){
+        this.foodName = "Orange";
+        this.score = 0.9F;
+        this.foodColour = Colour.ORANGE;
+        this.length = 5;
 
+        this.foodCell = food_cell;
+    }
+
+    @Override
     public String getFoodName() {
         return foodName;
     }
 
+    @Override
     public float getScore() {
         return score;
     }
 
+    @Override
     public Colour getFoodColour() {
         return foodColour;
     }
 
+    @Override
     public int getLength() {
         return length;
     }
 
+    @Override
     public Cell getFoodCell() {
         return foodCell;
     }
 
     @Override
     public String toString() {
-        return "Food{" +
+        return "Orange{" +
                 "foodName='" + foodName + '\'' +
                 ", score=" + score +
                 ", foodColour=" + foodColour +

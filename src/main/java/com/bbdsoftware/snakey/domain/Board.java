@@ -1,8 +1,8 @@
-package com.bbd.levelup2023.java.domain;
+package com.bbdsoftware.snakey.domain;
 
-import com.bbd.levelup2023.java.enums.CellType;
-import com.bbd.levelup2023.java.enums.Direction;
-import com.bbd.levelup2023.java.enums.FoodTypes;
+import com.bbdsoftware.snakey.enums.CellType;
+import com.bbdsoftware.snakey.enums.Direction;
+import com.bbdsoftware.snakey.enums.FoodTypes;
 
 import java.util.Random;
 

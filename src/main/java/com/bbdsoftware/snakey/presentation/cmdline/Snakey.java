@@ -1,8 +1,8 @@
-package com.bbd.levelup2023.java.presentation.cmdline;
+package com.bbdsoftware.snakey.presentation.cmdline;
 
-import com.bbd.levelup2023.java.domain.Board;
-import com.bbd.levelup2023.java.domain.Snake;
-import com.bbd.levelup2023.java.enums.Direction;
+import com.bbdsoftware.snakey.domain.Board;
+import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.enums.Direction;
 
 import java.util.Scanner;
 

@@ -1,19 +1,19 @@
-package com.bbd.levelup2023.java.domain;
+package com.bbdsoftware.snakey.domain;
 
-import com.bbd.levelup2023.java.enums.Colour;
+import com.bbdsoftware.snakey.enums.Colour;
 
-public class Orange  extends Food{
+public class Apple extends Food{
     private final String foodName;
     private final float score;
     private final Colour foodColour;
     private final int length;
     private final Cell foodCell;
 
-    public Orange(Cell food_cell){
-        this.foodName = "Orange";
-        this.score = 0.9F;
-        this.foodColour = Colour.ORANGE;
-        this.length = 5;
+    public Apple(Cell food_cell){
+        this.foodName = "Apple";
+        this.score = 0.5F;
+        this.foodColour = Colour.RED;
+        this.length = 2;
 
         this.foodCell = food_cell;
     }
@@ -45,7 +45,7 @@ public class Orange  extends Food{
 
     @Override
     public String toString() {
-        return "Orange{" +
+        return "Apple{" +
                 "foodName='" + foodName + '\'' +
                 ", score=" + score +
                 ", foodColour=" + foodColour +

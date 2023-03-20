@@ -1,6 +1,6 @@
-package com.bbd.levelup2023.java.app;
+package com.bbdsoftware.snakey;
 
-import com.bbd.levelup2023.java.presentation.cmdline.Menu;
+import com.bbdsoftware.snakey.presentation.cmdline.Menu;
 
 public class AppRunner {
     public static void main(String[] args) {

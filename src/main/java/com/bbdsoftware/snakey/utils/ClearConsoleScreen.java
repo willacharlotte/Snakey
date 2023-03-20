@@ -1,4 +1,4 @@
-package com.bbd.levelup2023.java.utils;
+package com.bbdsoftware.snakey.utils;
 
 public class ClearConsoleScreen {
     public static void clearConsole(){
