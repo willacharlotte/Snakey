@@ -9,12 +9,16 @@ import java.util.Scanner;
 
 public class AppRunner {
     public static void main(String[] args) {
-        Board my_board = new Board(7);
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        int board_size = 0;
+        System.out.println("Main menu");
+        System.out.print("Enter a board size: ");
+        board_size = myObj.nextInt();  // Read user input
+
+        Board my_board = new Board(board_size);
         //System.out.println(my_board);
 
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String userInput = "";
-
         int replaceFood = 0;
 
         String menu = "Snakey \n" +

@@ -2,7 +2,6 @@ package com.bbd.levelup2023.java.snakey;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Snake {
     private Cell head;
@@ -58,22 +57,11 @@ public class Snake {
 
     public void moveSnake(Cell new_cell, Direction direction, Food my_food){
         if (this.isAlive){
-            //System.out.println("snake moves " + direction + " to " + new_cell);
-            //System.out.println("YOU ATE A FOOD!!!");
-            if (this.currentLength < this.length) {
-                this.snakeBlocks.add(new_cell);
-                this.head = new_cell;
-                this.currentLength += 1;
-            }
-            else{
-                this.snakeBlocks.remove(0);
-                this.snakeBlocks.add(new_cell);
-                this.head = new_cell;
-            }
-            this.length += my_food.getLength();
-            //System.out.println("my_food.getLength(): " +  my_food.getLength());
-            this.foodItems.add(my_food);
-            this.snakeDirection = direction;
+            moveSnake(new_cell, direction);
+//            this.length += my_food.getLength();
+//            //System.out.println("my_food.getLength(): " +  my_food.getLength());
+//            this.foodItems.add(my_food);
+            eatFood(my_food);
         }
     }
 
@@ -98,10 +86,11 @@ public class Snake {
         return false;
     }
 
-    public void eatFruit(Food fruit){
-        this.length += fruit.getLength();
-        this.point += fruit.getPoints();
-        this.foodItems.add(fruit);
+    public void eatFood(Food food){
+        System.out.println("eatFood: " + food);
+        this.length += food.getLength();
+        this.point += food.getPoints();
+        this.foodItems.add(food);
     }
 
 

@@ -7,13 +7,6 @@ public class Apple extends Food{
     private int length;
     private Cell foodCell;
 
-    public Apple(){
-        this.foodName = "Apple";
-        this.points = 1;
-        this.foodColour = Colour.RED;
-        this.length = 2;
-    }
-
     public Apple(Cell food_cell){
         this.foodName = "Apple";
         this.points = 1;

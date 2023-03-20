@@ -60,7 +60,7 @@ public class Board {
      * @return if the cell is valid or not
      */
     private boolean isValid(Cell checkCell){
-        System.out.println(checkCell.getX() + "," + checkCell.getY() + " \t " + (this.board_size -1));
+        //System.out.println(checkCell.getX() + "," + checkCell.getY() + " \t " + (this.board_size -1));
         return checkCell.getX() < this.board_size && checkCell.getY() < this.board_size &&
                 checkCell.getX() >= 0 && checkCell.getY() >= 0;
     }
@@ -99,26 +99,26 @@ public class Board {
         removeSnakeOffBoard();
 
         if (direction.equals(Direction.UP)){
-            System.out.println("moving up");
+            //System.out.println("moving up");
             new_y -= 1;
         }
         else if (direction.equals(Direction.DOWN)){
-            System.out.println("moving down");
+            //System.out.println("moving down");
             new_y += 1;
         }
         else if (direction.equals(Direction.LEFT)){
-            System.out.println("moving left");
+            //System.out.println("moving left");
             new_x -= 1;
         }
         else{
-            System.out.println("moving right");
+            //System.out.println("moving right");
             new_x += 1;
         }
 
         Cell checkCell = new Cell(new_x, new_y);
         if (isValid(checkCell) && !my_snake.containsCell(checkCell)){
             Cell new_head = this.board_map[new_y][new_x];
-            System.out.println("new_head: " + new_head);
+            //System.out.println("new_head: " + new_head);
             if (new_head.getCellType().equals(CellType.NONE)) {
                 my_snake.moveSnake(new_head, direction);
             }
@@ -158,12 +158,12 @@ public class Board {
         //System.out.println(int_x + ", " + int_y + "-->" + foodType);
         //System.out.println("Food: " + FoodTypes.values()[foodType]);
 
-        if (this.my_food != null){
-            this.board_map[int_y][int_x].setCellType(CellType.NONE);
-            this.my_food = null;
-        }
+//        if (this.my_food != null){
+//            this.board_map[int_y][int_x].setCellType(CellType.NONE);
+//            this.my_food = null;
+//        }
 
-        if(FoodTypes.values()[foodType].equals(FoodTypes.APPLE)){
+        if(this.my_food == null && FoodTypes.values()[foodType].equals(FoodTypes.APPLE)){
             Apple my_apple = new Apple(food_cell);
             //System.out.println("Apple: " + my_apple);
             this.my_food = my_apple;
