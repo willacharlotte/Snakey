@@ -14,7 +14,7 @@ public class Snake {
     private List<Food> foodItems = new ArrayList<>();
     private boolean isAlive = true;
     private Direction snakeDirection;
-    private float score = 1;
+    private float score = 0.1F;
 
     public Snake(){
         this.length = 1;
@@ -57,18 +57,17 @@ public class Snake {
         }
     }
 
+    /**
+     * the snake eats a food
+     * @param new_cell the new cell to move to
+     * @param direction the direction of movement
+     * @param my_food the new food eaten
+     */
     public void moveSnake(Cell new_cell, Direction direction, Food my_food){
         if (this.isAlive){
             moveSnake(new_cell, direction);
-//            this.length += my_food.getLength();
-//            //System.out.println("my_food.getLength(): " +  my_food.getLength());
-//            this.foodItems.add(my_food);
             eatFood(my_food);
         }
-    }
-
-    public boolean getIsAlive(){
-        return this.isAlive;
     }
 
     public void killSnake(){
@@ -91,7 +90,7 @@ public class Snake {
     public void eatFood(Food food){
         System.out.println("eatFood: " + food);
         this.length += food.getLength();
-        this.score += food.getPoints();
+        this.score += food.getScore();
         this.foodItems.add(food);
     }
 

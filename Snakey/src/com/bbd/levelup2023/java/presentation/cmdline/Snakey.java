@@ -7,15 +7,29 @@ import com.bbd.levelup2023.java.enums.Direction;
 import java.util.Scanner;
 
 public class Snakey {
+    /**
+     * creates a board using the board size
+     * @param board_size the size of the board
+     * @return the created Board
+     */
     public static Board createBoard(int board_size){
         Board my_board = new Board(board_size);
         return my_board;
     }
 
+    /**
+     * adds food to the board
+     * @param my_board the board to add the food onto
+     */
     public static void addFood(Board my_board){
         my_board.addFood();
     }
 
+    /**
+     * moves the snake on the board
+     * @param my_board the board the snake is on
+     * @param userInput the users input
+     */
     public static void moveSnake(Board my_board, String userInput) {
         /* move snake */
         switch (userInput) {

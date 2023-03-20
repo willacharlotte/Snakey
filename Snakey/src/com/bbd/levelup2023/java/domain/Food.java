@@ -4,7 +4,7 @@ import com.bbd.levelup2023.java.enums.Colour;
 
 public abstract class Food{
     private String foodName;
-    private int points;
+    private float score;
     private Colour foodColour;
     private int length;
     private Cell foodCell;
@@ -15,8 +15,8 @@ public abstract class Food{
         return foodName;
     }
 
-    public int getPoints() {
-        return points;
+    public float getScore() {
+        return score;
     }
 
     public Colour getFoodColour() {
@@ -35,7 +35,7 @@ public abstract class Food{
     public String toString() {
         return "Food{" +
                 "foodName='" + foodName + '\'' +
-                ", points=" + points +
+                ", score=" + score +
                 ", foodColour=" + foodColour +
                 ", length=" + length +
                 ", foodCell=" + foodCell +

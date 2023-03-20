@@ -40,7 +40,7 @@ public class Menu {
                 "UP = w, DOWN = s, LEFT = a, RIGHT = d";
         Snake my_snake = my_board.getMy_snake();
 
-        while (!userInput.equals("q") && my_snake.getIsAlive()){
+        while (!userInput.equals("q") && my_snake.isAlive()){
             console.clearConsole();
 
             replaceFood = addFoodToBoard(my_board, replaceFood);
@@ -71,6 +71,7 @@ public class Menu {
         System.out.print("Would you like to play again? (Y=yes, N=no) ");
         String userInput = myObj.nextLine();  // Read user input
         if (userInput.equals("Y")){
+            this.my_board = null;
             newGame();
         }
     }

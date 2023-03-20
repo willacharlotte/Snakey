@@ -99,8 +99,8 @@ public class Board {
     }
 
     /**
-     * move the snake
-     * @param direction
+     * move the snake on the board using the direction provided by the player
+     * @param direction the direction to move the snake
      */
     public void moveSnake(Direction direction){
         int new_y = my_snake.getHead().getY();
@@ -166,11 +166,14 @@ public class Board {
             int foodType = rand.nextInt(FoodTypes.values().length);
 
             if (FoodTypes.values()[foodType].equals(FoodTypes.APPLE)) {
-                //System.out.println("Apple: " + my_apple);
                 this.my_food = new Apple(food_cell);
                 this.board_map[int_y][int_x].setCellType(CellType.FOOD);
-                //System.out.println("Food added to board: " + this.my_food);
             }
+            else if (FoodTypes.values()[foodType].equals(FoodTypes.ORANGE)){
+                this.my_food = new Orange(food_cell);
+                this.board_map[int_y][int_x].setCellType(CellType.FOOD);
+            }
+            //System.out.println("Food added to board: " + this.my_food);
         }
     }
 
