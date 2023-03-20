@@ -87,9 +87,6 @@ public class Board {
 
         Cell old_cell = this.board_map[new_y][new_x];
         removeSnakeOffBoard();
-        System.out.println(this);
-
-        //old_cell.setCellType(CellType.NONE);
 
         if (direction.equals(Direction.UP)){
             System.out.println("moving up");

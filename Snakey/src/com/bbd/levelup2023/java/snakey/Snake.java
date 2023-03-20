@@ -43,14 +43,16 @@ public class Snake {
         if (this.isAlive){
             //System.out.println("snake moves " + direction + " to " + new_cell);
             if (this.currentLength < this.length) {
+                System.out.println("IF");
                 this.snakeBlocks.add(new_cell);
                 this.head = new_cell;
                 currentLength += 1;
             }
             else{
-                this.snakeBlocks.clear();
-                this.setHead(new_cell);
-                currentLength = 1;
+                System.out.println("ELSE");
+                this.snakeBlocks.remove(0);
+                this.snakeBlocks.add(new_cell);
+                this.head = new_cell;
             }
             this.snakeDirection = direction;
         }
