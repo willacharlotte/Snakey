@@ -4,6 +4,7 @@ import com.bbdsoftware.snakey.domain.Board;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
 import com.bbdsoftware.snakey.domain.User;
+import com.bbdsoftware.snakey.enums.Direction;
 import com.bbdsoftware.snakey.utils.ClearConsoleScreen;
 
 import java.util.ArrayList;
@@ -17,72 +18,168 @@ public class Menu {
     private Board myBoard;
     private final List<User> users = new ArrayList<>();
 
-    private int get_board_size(){
-        int board_size;
-        System.out.println("===============================");
-        System.out.println("Welcome to the Snakey: The Game");
-        System.out.println("===============================");
-        //System.out.println("Main menu");
-        System.out.print("Enter a board size: ");
-        board_size = this.myObj.nextInt();  // Read user input
-        return board_size;
-    }
-
-    private void displayMenu(){
-        System.out.println("Choose a movement: " +
-                "UP = w, DOWN = s, LEFT = a, RIGHT = d");
-    }
+    public Menu(){ }
 
     public void newGame(){
         ClearConsoleScreen.clearConsole();
+        displayWelcomeScreen();
         int board_size = get_board_size();
 
         ClearConsoleScreen.clearConsole();
         this.myBoard = createBoard(board_size);
 
         playGame();
-
-        gameEnded(myObj);
     }
 
+    /**
+     * displays the welcome screen
+     */
+    private void displayWelcomeScreen(){
+        System.out.println("===============================");
+        System.out.println("Welcome to the Snakey: The Game");
+        System.out.println("===============================");
+    }
+
+    /**
+     * gets boardSize from the user
+     * @return the boardSize
+     */
+    private int get_board_size(){
+        System.out.print("Enter a board size: ");
+        return this.myObj.nextInt();
+    }
+
+    /**
+     * plays the game
+     */
     private void playGame() {
         String userInput = "";
         int replaceFood = 0;
+        String error = "";
 
         Snake my_snake = this.myBoard.getMySnake();
 
-        while (!userInput.equals("q") && my_snake.isAlive()){
+        while (my_snake.isAlive()){
             ClearConsoleScreen.clearConsole();
-            System.out.println(this.myBoard.isSnakeMax());
+            if (!error.isEmpty()){
+                System.out.println(error);
+                error = "";
+            }
+            replaceFood = addFoodToBoard(replaceFood);
 
-            replaceFood = addFoodToBoard(myBoard, replaceFood);
-
-            printGameDetails(myBoard);
+            displayGameDetails();
 
             userInput = getUserInput();
+            if (userInput.equals("q"))
+                displayGameQuit();
 
-            moveSnake(myBoard, userInput);
+            Direction userDirection = convertUserInput(userInput);
+            if (userDirection == null) {
+                error = "Choose a valid movement";
+                continue;
+            }
+
+            if (!validateUserInput(this.myBoard, userDirection)) {
+                error = "Choose a movement to turn into a right angle";
+                continue;
+            }
+            moveSnake(this.myBoard, userDirection);
 
             System.out.println();
             System.out.println();
+
+            if (this.myBoard.isSnakeMax())
+                displayGameWon();
 
             replaceFood++;
         }
+        displayGameLost();
     }
 
-    public Menu(){ }
+    /**
+     * add food to the board
+     * @param replaceFood determines if the food should be placed or not
+     * @return the replaceFood
+     */
+    private int addFoodToBoard(int replaceFood) {
+        // if replaceFood is 0
+        if(replaceFood == 0)
+            addFood(this.myBoard);
 
-    private void gameEnded(Scanner myObj){
-        System.out.println("Game ended!");
-        //this.highScore.add(this.my_board.getMy_snake().getScore());
+            // reset replaceFood if its the size of the board
+        else if (replaceFood == this.myBoard.getBoardSize() - 1)
+            replaceFood = -1;
 
+        return replaceFood;
+    }
+
+    /**
+     * display the game details
+     */
+    private void displayGameDetails() {
+        this.myBoard.printBoard();
+        System.out.println("Score: " + this.myBoard.getMySnake().getScore());
+
+        if (!this.myBoard.getMySnake().getFoodItems().isEmpty()) {
+            System.out.println("Food items eaten: ");
+            for (Food food : myBoard.getMySnake().getFoodItems()) {
+                System.out.println("  " + food.getFoodName());
+            }
+        }
+    }
+
+    /**
+     * get users input for movement
+     * @return the movement chosen
+     */
+    private String getUserInput() {
+        displayMovementMenu();
+        System.out.print("User input: ");
+        return myObj.nextLine();
+    }
+
+    /**
+     * displays the movement menu
+     */
+    private void displayMovementMenu(){
+        System.out.println("Choose a movement: " +
+                "UP = w, DOWN = s, LEFT = a, RIGHT = d, QUIT = q");
+    }
+
+    /**
+     * display game won
+     */
+    private void displayGameWon(){
+        System.out.println("You won!");
+        displayGameEnded();
+    }
+
+    /**
+     * display game lost
+     */
+    private void displayGameLost(){
+        System.out.println("You lost!");
+        displayGameEnded();
+    }
+
+    /**
+     * display game quit
+     */
+    private void displayGameQuit(){
+        System.out.println("You quit!");
+        displayGameEnded();
+    }
+
+    /**
+     * display game ended
+     */
+    private void displayGameEnded() {
         System.out.print("Enter your username: ");
         String username = myObj.nextLine();  // Read user input
         User new_user = new User(username, this.myBoard.getMySnake().getScore());
         this.users.add(new_user);
 
-        //System.out.println("High Scores: " + this.highScore);
-        System.out.println("Highscores: " + this.users);
+        System.out.println("High scores: " + this.users);
 
         System.out.print("Would you like to play again? (Y=yes, N=no) ");
         String userInput = myObj.nextLine();  // Read user input
@@ -90,36 +187,5 @@ public class Menu {
             this.myBoard = null;
             newGame();
         }
-    }
-
-    private String getUserInput() {
-        displayMenu();
-        System.out.print("User input: ");
-        String userInput = myObj.nextLine();  // Read user input
-        System.out.println(userInput);
-        return userInput;
-    }
-
-    private static int addFoodToBoard(Board my_board, int replaceFood) {
-        if(replaceFood == 0)
-            addFood(my_board);
-        else if (replaceFood == my_board.getBoardSize() - 1){
-            replaceFood = -1;
-        }
-        return replaceFood;
-    }
-
-    private static void printGameDetails(Board my_board) {
-        //System.out.println(my_board);
-        my_board.printBoard();
-        System.out.println("Score: " + my_board.getMySnake().getScore());
-
-        if (!my_board.getMySnake().getFoodItems().isEmpty()) {
-            System.out.println("Food items eaten: ");
-            for (Food food : my_board.getMySnake().getFoodItems()) {
-                System.out.println("  " + food.getFoodName());
-            }
-        }
-
     }
 }

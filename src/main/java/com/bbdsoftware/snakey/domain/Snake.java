@@ -10,10 +10,10 @@ public class Snake {
     private final List<Cell> snakeBlocks = new ArrayList<>();
     private int length;
     private int currentLength = 1;
-    private List<Food> foodItems = new ArrayList<>();
+    private final List<Food> foodItems = new ArrayList<>();
     private boolean isAlive = true;
-    private Direction snakeDirection;
-    private float score = 0.1F;
+    private Direction snakeDirection = Direction.RIGHT;
+    private float score = 0F;
 
     public Snake(){
         this.length = 1;
@@ -73,8 +73,21 @@ public class Snake {
         this.isAlive = false;
     }
 
-    public List<Cell> getSnakeBlocks() {
-        return snakeBlocks;
+    public boolean isValidTurn(Direction nextDirection){
+        if (nextDirection.equals(this.snakeDirection)){
+            return true;
+        }
+        else if ((nextDirection.equals(Direction.DOWN) || nextDirection.equals(Direction.UP)) &&
+                (this.snakeDirection.equals(Direction.LEFT) || this.snakeDirection.equals(Direction.RIGHT))){
+            return true;
+        }
+        else if ((nextDirection.equals(Direction.LEFT) || nextDirection.equals(Direction.RIGHT)) &&
+                (this.snakeDirection.equals(Direction.DOWN) || this.snakeDirection.equals(Direction.UP))){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public boolean containsCell(Cell newCell){
@@ -91,6 +104,11 @@ public class Snake {
         this.length += food.getLength();
         this.score += food.getScore();
         this.foodItems.add(food);
+    }
+
+
+    public List<Cell> getSnakeBlocks() {
+        return snakeBlocks;
     }
 
     public int getLength() {

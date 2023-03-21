@@ -95,6 +95,10 @@ public class Board {
         }
     }
 
+    public boolean isValidMoveForSnake(Direction snakeNewDirection){
+        return this.mySnake.isValidTurn(snakeNewDirection);
+    }
+
     /**
      * move the snake on the board using the direction provided by the player
      * @param direction the direction to move the snake
