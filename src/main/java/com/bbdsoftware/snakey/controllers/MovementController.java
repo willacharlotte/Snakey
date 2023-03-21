@@ -14,7 +14,6 @@ public class MovementController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
             case 87: case 38:
                 System.out.println("I moved up!");
