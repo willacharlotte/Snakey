@@ -6,33 +6,56 @@ import com.bbdsoftware.snakey.enums.Direction;
 public class Snakey {
     /**
      * creates a board using the board size
-     * @param board_size the size of the board
+     * @param boardSize the size of the board
      * @return the created Board
      */
-    public static Board createBoard(int board_size){
-        return new Board(board_size);
+    public static Board createBoard(int boardSize){
+        return new Board(boardSize);
     }
 
     /**
      * adds food to the board
-     * @param my_board the board to add the food onto
+     * @param myBoard the board to add the food onto
      */
-    public static void addFood(Board my_board){
-        my_board.addFood();
+    public static void addFood(Board myBoard){
+        myBoard.addFood();
+    }
+
+    /**
+     * converts the user input to a valid movement
+     * @param userInput the
+     * @return Direction chosen by user
+     */
+    public static Direction convertUserInput(String userInput) {
+        switch (userInput) {
+            case "w" -> {
+                return Direction.UP;
+            }
+            case "s" -> {
+                return Direction.DOWN;
+            }
+            case "a" -> {
+                return Direction.LEFT;
+            }
+            case "d" -> {
+                return Direction.RIGHT;
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 
     /**
      * moves the snake on the board
-     * @param my_board the board the snake is on
-     * @param userInput the users input
+     * @param myBoard the board the snake is on
+     * @param userDirection the users input
      */
-    public static void moveSnake(Board my_board, String userInput) {
-        switch (userInput) {
-            case "w" -> my_board.moveSnake(Direction.UP);
-            case "s" -> my_board.moveSnake(Direction.DOWN);
-            case "a" -> my_board.moveSnake(Direction.LEFT);
-            case "d" -> my_board.moveSnake(Direction.RIGHT);
-            default -> System.out.println("choose valid number");
-        }
+    public static void moveSnake(Board myBoard, Direction userDirection) {
+        myBoard.moveSnake(userDirection);
+    }
+
+    public static boolean validateUserInput(Board myBoard, Direction userInput){
+        return myBoard.isValidMoveForSnake(userInput);
     }
 }
