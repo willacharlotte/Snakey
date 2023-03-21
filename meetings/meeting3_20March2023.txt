@@ -1,0 +1,74 @@
+Meeting 3 for Snakey: The Game (20 March 2023, 6.30pm SAST)
+===========================================================
+
+Attendees: Raaga Krishna, Palesa, Jesse
+
+
+
+db:
+- id 
+- username 
+- score 
+
+remote db
+- we can have a setup sql script (Willa)
+
+Leaderboard class (Palesa)
+- string int hashmap 
+- add score method with user 
+- just like the-hive
+
+
+username
+- should it be unique... (Palesa) 
+- when will the user give their username? At start of game or end? 
+- Willa: prompt user to make a new username if the username is taken 
+		 every score has a unique username 
+		 but we could say: user can have same username 
+
+movement class (Willa) 
+- Swing instance... 
+
+
+Questions:
+
+1. How do we indicate the snake's head? 
+	when playing the game, the head will be clear 
+	the snake is always moving.. 
+	
+	each cell, when we render it, each cell will not just be 1 pixel 
+	but it will be a few pixel in each one 
+	head can be a visual head and it takes up more and more cells 
+
+2. How we do show which way the snake has grown? 
+	it will make sense 
+	every tick of snake
+	if you eat, the tail will stay in same spot and head will move forward 
+
+3. Do we need a "You won"? We can show the points you got after you die, because at a point, you will have no space to move around you..
+	we can code it 
+
+4. Does the snake grow immediately after eating? 
+	answered in 2 
+
+5. The snake starts with the length of 1, agree? 
+	yes 
+	
+
+Raaga:
+1. enter username at end of game (after Game Over) 
+2. create a PR 
+
+Willa: 
+1. movement controller 
+2. start sound 
+
+Palesa: 
+1. remote db (on Thursday) 
+2. Game board on JFrame 
+
+
+are we having a meeting tomorrow? 
+- Willa: we should 
+
+Next meeting at 6.30pm 
