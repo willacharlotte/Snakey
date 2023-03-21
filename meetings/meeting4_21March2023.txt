@@ -1,0 +1,76 @@
+Meeting 4 for Snakey: The Game (21 March 2023, 6.30pm SAST)
+===========================================================
+
+Attendees: Raaga Krishna, Palesa, Willa, Jesse 
+
+Same page of the game mechanics (Willa) 
+- Snake game on Google 
+
+TimeController (Willa) 
+- uses scheduled executor 
+- runs a task, every x number of seconds 
+- lambdas used a lot in functional interfaces 
+
+when snake moves: (Willa) 
+1. moveSnake (returns a Cell) 
+2. then check if it moved into a valid pos (inside board or into itself) 
+	if SNAKE, then ends game 
+	if FOOD, then does a special action: the doSpecial does this 
+	if not in list, ends game 
+	if NONE, then it just moves (move head to that pos) 
+	
+- in array, just push the currIndex 
+	shift array 
+	
+	
+Snake: (Raaga) 
+- addLength
+- addScore 
+- decrementLength 
+- decrementScore 
+- moveSnake takes in no parameters 
+
+
+Removes all changes in the git branch: 
+- git restore . 
+
+
+TimeController can add a new food 
+- rename to GameController (Jesse) 
+
+
+Order of to-do: 
+1. add setDirection --> done 
+2. Willa ... 
+3. add dir to snake class 
+4. move snake 
+
+
+Timer needs to tell board how to update 
+
+
+Rectangle ArrayList 
+
+To-do: 
+- game should end when it hits wall... 
+
+
+db: User table 
+- id
+- username 
+- score 
+- dateAdded 
+
+
+Sound (Willa) 
+- could be freeware 
+- might not do it myself 
+
+
+Capital w for keyListener? Yes (Willa) 
+- listens for key code ;-)
+	acts independently of the shift 
+
+
+
+
