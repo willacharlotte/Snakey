@@ -3,7 +3,8 @@ package com.bbdsoftware.snakey.controllers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.bbdsoftware.snakey.domain.Snake;;
+import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.enums.Direction;;
 
 public class MovementController implements KeyListener {
     private final Snake snake;
@@ -15,18 +16,18 @@ public class MovementController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case 87: case 38:
-                System.out.println("I moved up!");
+           case 87: case 38:
+                snake.setSnakeDirection(Direction.UP);
                 break;
             case 65: case 37:
-                System.out.println("I moved left!");
+                snake.setSnakeDirection(Direction.LEFT);
                 break;
             case 83: case 40:
-                System.out.println("I moved down!");
+                snake.setSnakeDirection(Direction.DOWN);
                 break;
             case 68: case 39:
-                System.out.println("I moved right!");
-                break;
+                snake.setSnakeDirection(Direction.RIGHT);
+                break; 
         }
     }
 
