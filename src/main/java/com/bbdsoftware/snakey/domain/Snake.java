@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Snake {
     private Cell head;
-    //private Cell[] snakeBlocks;
     private final List<Cell> snakeBlocks = new ArrayList<>();
     private int length;
     private int currentLength = 1;
@@ -37,21 +36,21 @@ public class Snake {
 
     /**
      * moves the snake and sets its direction
-     * @param new_cell the new cell for snake to move to
+     * @param newCell the new cell for snake to move to
      * @param direction the direction of the snake now
      */
-    public void moveSnake(Cell new_cell, Direction direction){
+    public void moveSnake(Cell newCell, Direction direction){
         if (this.isAlive){
-            //System.out.println("snake moves " + direction + " to " + new_cell);
+            //System.out.println("snake moves " + direction + " to " + newCell);
             if (this.currentLength < this.length) {
-                this.snakeBlocks.add(new_cell);
-                this.head = new_cell;
+                this.snakeBlocks.add(newCell);
+                this.head = newCell;
                 currentLength += 1;
             }
             else{
                 this.snakeBlocks.remove(0);
-                this.snakeBlocks.add(new_cell);
-                this.head = new_cell;
+                this.snakeBlocks.add(newCell);
+                this.head = newCell;
             }
             this.snakeDirection = direction;
         }
@@ -59,14 +58,14 @@ public class Snake {
 
     /**
      * the snake eats a food
-     * @param new_cell the new cell to move to
+     * @param newCell the new cell to move to
      * @param direction the direction of movement
-     * @param my_food the new food eaten
+     * @param myFood the new food eaten
      */
-    public void moveSnake(Cell new_cell, Direction direction, Food my_food){
+    public void moveSnake(Cell newCell, Direction direction, Food myFood){
         if (this.isAlive){
-            moveSnake(new_cell, direction);
-            eatFood(my_food);
+            moveSnake(newCell, direction);
+            eatFood(myFood);
         }
     }
 
@@ -78,9 +77,9 @@ public class Snake {
         return snakeBlocks;
     }
 
-    public boolean containsCell(Cell new_cell){
+    public boolean containsCell(Cell newCell){
         for (Cell cell : this.getSnakeBlocks()){
-            if (cell.getX() == new_cell.getX() && cell.getY() == new_cell.getY()){
+            if (cell.getX() == newCell.getX() && cell.getY() == newCell.getY()){
                 return true;
             }
         }

@@ -9,13 +9,13 @@ public class Orange  extends Food{
     private final int length;
     private final Cell foodCell;
 
-    public Orange(Cell food_cell){
+    public Orange(Cell foodCell){
         this.foodName = "Orange";
         this.score = 0.9F;
         this.foodColour = Colour.ORANGE;
         this.length = 5;
 
-        this.foodCell = food_cell;
+        this.foodCell = foodCell;
     }
 
     @Override

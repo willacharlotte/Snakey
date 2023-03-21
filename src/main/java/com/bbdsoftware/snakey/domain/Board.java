@@ -7,17 +7,17 @@ import com.bbdsoftware.snakey.enums.FoodTypes;
 import java.util.Random;
 
 public class Board {
-    private int board_size;
-    private Cell[][] board_map;
-    private final Snake my_snake = new Snake();
-    private Food my_food;
+    private final int boardSize;
+    private Cell[][] boardMap;
+    private final Snake mySnake = new Snake();
+    private Food myFood;
 
-    public Board(int board_size) throws IllegalArgumentException{
-        if(board_size % 2 == 0){
+    public Board(int boardSize) throws IllegalArgumentException{
+        if(boardSize % 2 == 0){
             throw new IllegalArgumentException("Board size should be odd number!");
         }
 
-        this.board_size = board_size;
+        this.boardSize = boardSize;
         createBoard();
         createSnake();
     }
@@ -26,7 +26,7 @@ public class Board {
      * creates the board using the board_size
      */
     private void createBoard(){
-        this.board_map = new Cell[board_size][board_size];
+        this.boardMap = new Cell[boardSize][boardSize];
         createCells();
     }
 
@@ -34,9 +34,9 @@ public class Board {
      * converts each element in the board_map to a Cell object
      */
     private void createCells(){
-        for (int i=0; i<this.board_size ; i++){
-            for (int j=0; j<this.board_size ; j++){
-                this.board_map[i][j] = new Cell(j, i);
+        for (int i = 0; i<this.boardSize; i++){
+            for (int j = 0; j<this.boardSize; j++){
+                this.boardMap[i][j] = new Cell(j, i);
             }
         }
     }
@@ -45,9 +45,9 @@ public class Board {
      * creates a snake in the center left of the board
      */
     private void createSnake(){
-        Cell center_cell = this.board_map[this.board_size/2][0];
+        Cell center_cell = this.boardMap[this.boardSize /2][0];
         center_cell.setCellType(CellType.SNAKE);
-        my_snake.setHead(center_cell);
+        mySnake.setHead(center_cell);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Board {
      * @return if the cell is valid or not
      */
     private boolean isValid(Cell checkCell){
-        return checkCell.getX() < this.board_size && checkCell.getY() < this.board_size &&
+        return checkCell.getX() < this.boardSize && checkCell.getY() < this.boardSize &&
                 checkCell.getX() >= 0 && checkCell.getY() >= 0;
     }
 
@@ -66,7 +66,7 @@ public class Board {
      * @return if on the snake, return True
      */
     private boolean isOnSnake(Cell checkCell){
-        for (Cell snake_cell : my_snake.getSnakeBlocks()){
+        for (Cell snake_cell : mySnake.getSnakeBlocks()){
             if (snake_cell.getX() == checkCell.getX() && snake_cell.getY() == checkCell.getY())
                 return true;
         }
@@ -77,10 +77,10 @@ public class Board {
      * remove snake off the board
      */
     private void removeSnakeOffBoard(){
-        for (int i=0; i<this.board_size ; i++){
-            for (int j=0; j<this.board_size ; j++){
-                if(this.board_map[i][j].getCellType().equals(CellType.SNAKE)){
-                    this.board_map[i][j].setCellType(CellType.NONE);
+        for (int i = 0; i<this.boardSize; i++){
+            for (int j = 0; j<this.boardSize; j++){
+                if(this.boardMap[i][j].getCellType().equals(CellType.SNAKE)){
+                    this.boardMap[i][j].setCellType(CellType.NONE);
                 }
             }
         }
@@ -90,8 +90,8 @@ public class Board {
      * add snake back on the board
      */
     private void addSnakeToBoard(){
-        for(Cell snake_cell : my_snake.getSnakeBlocks()){
-            this.board_map[snake_cell.getY()][snake_cell.getX()].setCellType(CellType.SNAKE);
+        for(Cell snake_cell : mySnake.getSnakeBlocks()){
+            this.boardMap[snake_cell.getY()][snake_cell.getX()].setCellType(CellType.SNAKE);
         }
     }
 
@@ -100,10 +100,10 @@ public class Board {
      * @param direction the direction to move the snake
      */
     public void moveSnake(Direction direction){
-        int new_y = my_snake.getHead().getY();
-        int new_x = my_snake.getHead().getX();
+        int new_y = mySnake.getHead().getY();
+        int new_x = mySnake.getHead().getX();
 
-        Cell old_cell = this.board_map[new_y][new_x];
+        Cell old_cell = this.boardMap[new_y][new_x];
         removeSnakeOffBoard();
 
         if (direction.equals(Direction.UP)){
@@ -120,24 +120,24 @@ public class Board {
         }
 
         Cell checkCell = new Cell(new_x, new_y);
-        if (isValid(checkCell) && !my_snake.containsCell(checkCell)){
-            Cell new_head = this.board_map[new_y][new_x];
+        if (isValid(checkCell) && !mySnake.containsCell(checkCell)){
+            Cell new_head = this.boardMap[new_y][new_x];
 
             // if blank cell
             if (new_head.getCellType().equals(CellType.NONE)) {
-                my_snake.moveSnake(new_head, direction);
+                mySnake.moveSnake(new_head, direction);
             }
 
             // if contains food
             else if (new_head.getCellType().equals(CellType.FOOD)){
-                my_snake.moveSnake(new_head, direction, my_food);
-                this.my_food = null;
+                mySnake.moveSnake(new_head, direction, myFood);
+                this.myFood = null;
             }
             addSnakeToBoard();
         }
         else{
             old_cell.setCellType(CellType.SNAKE);
-            my_snake.killSnake();
+            mySnake.killSnake();
         }
     }
 
@@ -145,29 +145,29 @@ public class Board {
      * add food to the board
      */
     public void addFood(){
-        if (this.my_food == null) {
+        if (this.myFood == null) {
             Random rand = new Random();
-            int int_x = rand.nextInt(this.board_size);
-            int int_y = rand.nextInt(this.board_size);
+            int int_x = rand.nextInt(this.boardSize);
+            int int_y = rand.nextInt(this.boardSize);
 
             Cell food_cell = new Cell(int_x, int_y);
 
             // if not on snake
             while (isOnSnake(food_cell)) {
-                int_x = rand.nextInt(this.board_size);
-                int_y = rand.nextInt(this.board_size);
+                int_x = rand.nextInt(this.boardSize);
+                int_y = rand.nextInt(this.boardSize);
                 food_cell = new Cell(int_x, int_y);
             }
 
             int foodType = rand.nextInt(FoodTypes.values().length);
 
             if (FoodTypes.values()[foodType].equals(FoodTypes.APPLE)) {
-                this.my_food = new Apple(food_cell);
-                this.board_map[int_y][int_x].setCellType(CellType.FOOD);
+                this.myFood = new Apple(food_cell);
+                this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
             }
             else if (FoodTypes.values()[foodType].equals(FoodTypes.ORANGE)){
-                this.my_food = new Orange(food_cell);
-                this.board_map[int_y][int_x].setCellType(CellType.FOOD);
+                this.myFood = new Orange(food_cell);
+                this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
             }
             //System.out.println("Food added to board: " + this.my_food);
         }
@@ -177,9 +177,9 @@ public class Board {
      * printing the board on the cmd line
      */
     public void printBoard(){
-        for (int i=0; i<this.board_size ; i++){
-            for (int j=0; j<this.board_size ; j++){
-                Cell this_cell = this.board_map[i][j];
+        for (int i = 0; i<this.boardSize; i++){
+            for (int j = 0; j<this.boardSize; j++){
+                Cell this_cell = this.boardMap[i][j];
                 if (this_cell.getCellType().equals(CellType.NONE)){
                     System.out.print('N');
                 }
@@ -199,32 +199,32 @@ public class Board {
     }
 
     public boolean isSnakeMax(){
-        return this.my_snake.getSnakeBlocks().size() == this.board_size * this.board_size;
+        return this.mySnake.getSnakeBlocks().size() == this.boardSize * this.boardSize;
     }
 
-    public int getBoard_size() {
-        return board_size;
+    public int getBoardSize() {
+        return boardSize;
     }
 
-    public Snake getMy_snake() {
-        return my_snake;
+    public Snake getMySnake() {
+        return mySnake;
     }
 
     @Override
     public String toString() {
         StringBuilder board_map_toString = new StringBuilder();
-        for (int i=0; i<this.board_size ; i++){
-            for (int j=0; j<this.board_size ; j++){
-                board_map_toString.append(this.board_map[i][j]).append(" |");
+        for (int i = 0; i<this.boardSize; i++){
+            for (int j = 0; j<this.boardSize; j++){
+                board_map_toString.append(this.boardMap[i][j]).append(" |");
             }
             board_map_toString.append("===\n");
         }
 
         return "Board{" +
-                "board_size=" + board_size +
-                ", \nboard_map=" + board_map_toString +
-                ", \nmy_snake=" + my_snake +
-                ", \nmy_food=" + my_food +
+                "boardSize=" + boardSize +
+                ", \nboardMap=" + board_map_toString +
+                ", \nmySnake=" + mySnake +
+                ", \nmyFood=" + myFood +
                 '}';
     }
 }
