@@ -1,6 +1,9 @@
 package com.bbdsoftware.snakey.utils;
 
 public class ClearConsoleScreen {
+    /**
+     * clears the console screen
+     */
     public static void clearConsole(){
         try{
             String operatingSystem = System.getProperty("os.name");

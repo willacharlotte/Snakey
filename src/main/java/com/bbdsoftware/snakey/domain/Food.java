@@ -11,6 +11,16 @@ public abstract class Food{
 
     public Food(){ }
 
+    protected Food(String foodName, float score, Colour foodColour, int length, Cell foodCell){
+        this.foodName = foodName;
+        this.score = score;
+        this.foodColour = foodColour;
+        this.length = length;
+        this.foodCell = foodCell;
+    }
+
+    public abstract void doSpecial(Snake snake);
+
     public String getFoodName() {
         return foodName;
     }
@@ -33,7 +43,7 @@ public abstract class Food{
 
     @Override
     public String toString() {
-        return "Food{" +
+        return getClass().getSimpleName() + "{" +
                 "foodName='" + foodName + '\'' +
                 ", score=" + score +
                 ", foodColour=" + foodColour +
