@@ -106,6 +106,9 @@ public class Snake {
         this.foodItems.add(food);
     }
 
+    public void setSnakeDirection(Direction snakeDirection) {
+        this.snakeDirection = snakeDirection;
+    }
 
     public List<Cell> getSnakeBlocks() {
         return snakeBlocks;

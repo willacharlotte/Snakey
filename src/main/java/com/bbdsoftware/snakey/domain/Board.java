@@ -103,25 +103,17 @@ public class Board {
      * move the snake on the board using the direction provided by the player
      * @param direction the direction to move the snake
      */
-    public void moveSnake(Direction direction){
+    public void moveSnakeOnBoard(Direction direction){
         int new_y = mySnake.getHead().getY();
         int new_x = mySnake.getHead().getX();
 
         Cell old_cell = this.boardMap[new_y][new_x];
         removeSnakeOffBoard();
 
-        if (direction.equals(Direction.UP)){
-            new_y -= 1;
-        }
-        else if (direction.equals(Direction.DOWN)){
-            new_y += 1;
-        }
-        else if (direction.equals(Direction.LEFT)){
-            new_x -= 1;
-        }
-        else{
-            new_x += 1;
-        }
+        if (direction.equals(Direction.UP)) new_y -= 1;
+        else if (direction.equals(Direction.DOWN)) new_y += 1;
+        else if (direction.equals(Direction.LEFT)) new_x -= 1;
+        else new_x += 1;
 
         Cell checkCell = new Cell(new_x, new_y);
         if (isValid(checkCell) && !mySnake.containsCell(checkCell)){
