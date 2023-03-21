@@ -1,33 +1,36 @@
 package com.bbdsoftware.snakey;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class Menu extends Board {
-    JButton startButton;
-    JButton quitButton;
-    JButton leaderboardButton;
+public class Menu extends JPanel {
+    JButton startButton = new JButton("Start Game");
+    JButton quitButton = new JButton("Quit");
+    JButton leaderboardButton = new JButton("Leaderboard");
 
     Menu() {
-        startButton = new JButton("Start Game");
-        quitButton = new JButton("Quit");
-        leaderboardButton = new JButton("Leaderboard");
-    }
+        this.setBackground(Color.BLACK);
+        this.setPreferredSize(new Dimension(600, 600));
+        this.setFocusable(true);
 
-    private void startMenu() {
         startButton.setBounds(250, 50, 200, 40);
         leaderboardButton.setBounds(250, 100, 200, 40);
         quitButton.setBounds(250, 150, 200, 40);
 
-        board.add(startButton);
-        board.add(leaderboardButton);
-        board.add(quitButton);
+        startMenu();
+
     }
 
-    void processMenu() {
-        startMenu();
+    void startMenu(){
+      add(startButton);
+        add(leaderboardButton);
+        add(quitButton);
+
         startButton.addActionListener(e -> {
-            System.out.println("clicked");
             //get game board
+            new GameBoard();
+
+
         });
         leaderboardButton.addActionListener(e -> {
             System.out.println("clicked");
@@ -40,6 +43,7 @@ public class Menu extends Board {
                 System.exit(0);
             }
         });
+
     }
 
 }
