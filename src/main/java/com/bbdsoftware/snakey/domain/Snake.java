@@ -34,6 +34,48 @@ public class Snake {
         return this.head;
     }
 
+    public Cell moveSnake(Direction direction){
+        Cell head = this.head;
+        int x = head.getX(), y = head.getY();
+        if (this.snakeDirection.equals(direction) && direction.equals(Direction.UP)){
+            y -= 1;
+        }
+        else if (this.snakeDirection.equals(direction) && direction.equals(Direction.DOWN)){
+            y += 1;
+        }
+        else if (this.snakeDirection.equals(direction) && direction.equals(Direction.LEFT)){
+            x -= 1;
+        }
+        else if (this.snakeDirection.equals(direction) && direction.equals(Direction.RIGHT)){
+            x += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.UP) && direction.equals(Direction.LEFT)){
+            x -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.UP) && direction.equals(Direction.RIGHT)){
+            x += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.DOWN) && direction.equals(Direction.LEFT)){
+            x -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.DOWN) && direction.equals(Direction.RIGHT)){
+            x += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.RIGHT) && direction.equals(Direction.UP)){
+            y -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.RIGHT) && direction.equals(Direction.DOWN)){
+            y += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.LEFT) && direction.equals(Direction.UP)){
+            y -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.LEFT) && direction.equals(Direction.DOWN)){
+            y += 1;
+        }
+        return new Cell(x, y);
+    }
+
     /**
      * moves the snake and sets its direction
      * @param newCell the new cell for snake to move to

@@ -118,6 +118,7 @@ public class Menu {
      */
     private void displayGameDetails() {
         this.myBoard.printBoard();
+        //System.out.println(this.myBoard);
         System.out.println("Score: " + this.myBoard.getMySnake().getScore());
 
         if (!this.myBoard.getMySnake().getFoodItems().isEmpty()) {

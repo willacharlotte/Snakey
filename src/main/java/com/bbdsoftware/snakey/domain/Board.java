@@ -104,6 +104,38 @@ public class Board {
      * @param direction the direction to move the snake
      */
     public void moveSnakeOnBoard(Direction direction){
+        Cell newCell = this.mySnake.moveSnake(direction);
+        //System.out.println("newCell: " + newCell);
+
+        if (isValid(newCell)){
+            //System.out.println("VALID CELL!");
+
+            Cell new_head = this.boardMap[newCell.getY()][newCell.getX()];
+
+            // if blank cell
+            if (new_head.getCellType().equals(CellType.NONE)) {
+                mySnake.moveSnake(new_head, direction);
+            }
+
+            // if contains food
+            else if (new_head.getCellType().equals(CellType.FOOD)){
+                mySnake.moveSnake(new_head, direction, myFood);
+                this.myFood = null;
+            }
+
+            // if contains snake
+            else if (new_head.getCellType().equals(CellType.SNAKE)){
+                mySnake.killSnake();
+            }
+
+            removeSnakeOffBoard();
+            addSnakeToBoard();
+        }
+        else{
+            mySnake.killSnake();
+        }
+
+        /*
         int new_y = mySnake.getHead().getY();
         int new_x = mySnake.getHead().getX();
 
@@ -135,6 +167,7 @@ public class Board {
             old_cell.setCellType(CellType.SNAKE);
             mySnake.killSnake();
         }
+        */
     }
 
     /**
