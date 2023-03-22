@@ -114,12 +114,12 @@ public class Board {
 
             // if blank cell
             if (new_head.getCellType().equals(CellType.NONE)) {
-                mySnake.moveSnake(new_head, direction);
+                mySnake.moveSnake(new_head);
             }
 
             // if contains food
             else if (new_head.getCellType().equals(CellType.FOOD)){
-                mySnake.moveSnake(new_head, direction, myFood);
+                mySnake.moveSnake(new_head, this.myFood);
                 this.myFood = null;
             }
 
