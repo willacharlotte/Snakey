@@ -1,18 +1,19 @@
 package com.bbdsoftware.snakey.domain;
 
-import com.bbdsoftware.snakey.enums.Colour;
+import java.awt.Color;
+import com.bbdsoftware.snakey.enums.FoodTypes;
 
 public abstract class Food{
-    private String foodName;
+    private FoodTypes foodType;
     private float score;
-    private Colour foodColour;
+    private Color foodColour;
     private int length;
     private Cell foodCell;
 
     public Food(){ }
 
-    protected Food(String foodName, float score, Colour foodColour, int length, Cell foodCell){
-        this.foodName = foodName;
+    protected Food(FoodTypes foodType, float score, Color foodColour, int length, Cell foodCell){
+        this.foodType = foodType;
         this.score = score;
         this.foodColour = foodColour;
         this.length = length;
@@ -21,15 +22,15 @@ public abstract class Food{
 
     public abstract void doSpecial(Snake snake);
 
-    public String getFoodName() {
-        return foodName;
+    public FoodTypes getFoodType() {
+        return foodType;
     }
 
     public float getScore() {
         return score;
     }
 
-    public Colour getFoodColour() {
+    public Color getFoodColour() {
         return foodColour;
     }
 
@@ -44,7 +45,7 @@ public abstract class Food{
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
-                "foodName='" + foodName + '\'' +
+                "foodType='" + foodType + '\'' +
                 ", score=" + score +
                 ", foodColour=" + foodColour +
                 ", length=" + length +

@@ -125,7 +125,7 @@ public class Menu {
         if (!this.myBoard.getMySnake().getFoodItems().isEmpty()) {
             System.out.println("Food items eaten: ");
             for (Food food : myBoard.getMySnake().getFoodItems()) {
-                System.out.println("  " + food.getFoodName());
+                System.out.println("  " + food.getFoodType());
             }
         }
     }

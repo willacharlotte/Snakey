@@ -22,15 +22,13 @@ public class Menu extends JPanel {
     }
 
     void startMenu(){
-      add(startButton);
+        add(startButton);
         add(leaderboardButton);
         add(quitButton);
 
         startButton.addActionListener(e -> {
             //get game board
             new GameBoard();
-
-
         });
         leaderboardButton.addActionListener(e -> {
             System.out.println("clicked");

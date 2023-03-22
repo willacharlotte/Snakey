@@ -3,9 +3,9 @@ import java.awt.Color;
 
 import com.bbdsoftware.snakey.enums.FoodTypes;
 
-public class Orange  extends Food{
-    public Orange(Cell foodCell){
-        super(FoodTypes.ORANGE, 0.9F, Color.orange, 5, foodCell);
+public class Banana  extends Food{
+    public Banana(Cell foodCell){
+        super(FoodTypes.BANANA, 0.2F, Color.yellow, 5, foodCell);
     }
 
     @Override

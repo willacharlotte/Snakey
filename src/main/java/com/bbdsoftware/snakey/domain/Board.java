@@ -3,7 +3,6 @@ package com.bbdsoftware.snakey.domain;
 import com.bbdsoftware.snakey.enums.CellType;
 import com.bbdsoftware.snakey.enums.Direction;
 import com.bbdsoftware.snakey.enums.FoodTypes;
-
 import java.util.Random;
 
 public class Board {
@@ -36,7 +35,7 @@ public class Board {
     private void createCells(){
         for (int i = 0; i<this.boardSize; i++){
             for (int j = 0; j<this.boardSize; j++){
-                this.boardMap[i][j] = new Cell(j, i);
+                this.boardMap[i][j] = new Cell(j, i, Direction.RIGHT);
             }
         }
     }
@@ -45,9 +44,9 @@ public class Board {
      * creates a snake in the center left of the board
      */
     private void createSnake(){
-        Cell center_cell = this.boardMap[this.boardSize /2][0];
-        center_cell.setCellType(CellType.SNAKE);
-        mySnake.setHead(center_cell);
+        Cell centerCell = this.boardMap[this.boardSize /2][0];
+        centerCell.setCellType(CellType.SNAKE);
+        mySnake.setHead(centerCell);
     }
 
     /**
@@ -66,8 +65,8 @@ public class Board {
      * @return if on the snake, return True
      */
     private boolean isOnSnake(Cell checkCell){
-        for (Cell snake_cell : mySnake.getSnakeBlocks()){
-            if (snake_cell.getX() == checkCell.getX() && snake_cell.getY() == checkCell.getY())
+        for (Cell snakeCell : mySnake.getSnakeBlocks()){
+            if (snakeCell.getX() == checkCell.getX() && snakeCell.getY() == checkCell.getY())
                 return true;
         }
         return false;
@@ -90,8 +89,8 @@ public class Board {
      * add snake back on the board
      */
     private void addSnakeToBoard(){
-        for(Cell snake_cell : mySnake.getSnakeBlocks()){
-            this.boardMap[snake_cell.getY()][snake_cell.getX()].setCellType(CellType.SNAKE);
+        for(Cell snakeCell : mySnake.getSnakeBlocks()){
+            this.boardMap[snakeCell.getY()][snakeCell.getX()].setCellType(CellType.SNAKE);
         }
     }
 
@@ -105,26 +104,24 @@ public class Board {
      */
     public void processSnakeMovement(Direction direction){
         Cell newCell = this.mySnake.moveSnake(direction);
-        //System.out.println("newCell: " + newCell);
 
         if (isValid(newCell)){
-            //System.out.println("VALID CELL!");
-
-            Cell new_head = this.boardMap[newCell.getY()][newCell.getX()];
+            Cell newHead = this.boardMap[newCell.getY()][newCell.getX()];
+            newHead.setCellDirection(direction);
 
             // if blank cell
-            if (new_head.getCellType().equals(CellType.NONE)) {
-                mySnake.moveSnake(new_head);
+            if (newHead.getCellType().equals(CellType.NONE)) {
+                mySnake.moveSnake(newHead);
             }
 
             // if contains food
-            else if (new_head.getCellType().equals(CellType.FOOD)){
-                mySnake.moveSnake(new_head, this.myFood);
+            else if (newHead.getCellType().equals(CellType.FOOD)){
+                mySnake.moveSnake(newHead, this.myFood);
                 this.myFood = null;
             }
 
             // if contains snake
-            else if (new_head.getCellType().equals(CellType.SNAKE)){
+            else if (newHead.getCellType().equals(CellType.SNAKE)){
                 mySnake.killSnake();
             }
 
@@ -134,72 +131,43 @@ public class Board {
         else{
             mySnake.killSnake();
         }
-
-        /*
-        int new_y = mySnake.getHead().getY();
-        int new_x = mySnake.getHead().getX();
-
-        Cell old_cell = this.boardMap[new_y][new_x];
-        removeSnakeOffBoard();
-
-        if (direction.equals(Direction.UP)) new_y -= 1;
-        else if (direction.equals(Direction.DOWN)) new_y += 1;
-        else if (direction.equals(Direction.LEFT)) new_x -= 1;
-        else new_x += 1;
-
-        Cell checkCell = new Cell(new_x, new_y);
-        if (isValid(checkCell) && !mySnake.containsCell(checkCell)){
-            Cell new_head = this.boardMap[new_y][new_x];
-
-            // if blank cell
-            if (new_head.getCellType().equals(CellType.NONE)) {
-                mySnake.moveSnake(new_head, direction);
-            }
-
-            // if contains food
-            else if (new_head.getCellType().equals(CellType.FOOD)){
-                mySnake.moveSnake(new_head, direction, myFood);
-                this.myFood = null;
-            }
-            addSnakeToBoard();
-        }
-        else{
-            old_cell.setCellType(CellType.SNAKE);
-            mySnake.killSnake();
-        }
-        */
     }
 
     /**
      * add food to the board
      */
-    public void addFood(){
+    public Food getFood(){
         if (this.myFood == null) {
             Random rand = new Random();
             int int_x = rand.nextInt(this.boardSize);
             int int_y = rand.nextInt(this.boardSize);
 
-            Cell food_cell = new Cell(int_x, int_y);
+            Cell foodCell = new Cell(int_x, int_y, Direction.UP);
 
             // if not on snake
-            while (isOnSnake(food_cell)) {
+            while (isOnSnake(foodCell)) {
                 int_x = rand.nextInt(this.boardSize);
                 int_y = rand.nextInt(this.boardSize);
-                food_cell = new Cell(int_x, int_y);
+                foodCell = new Cell(int_x, int_y, Direction.UP);
             }
 
             int foodType = rand.nextInt(FoodTypes.values().length);
-
-            if (FoodTypes.values()[foodType].equals(FoodTypes.APPLE)) {
-                this.myFood = new Apple(food_cell);
-                this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
+            switch(foodType){
+                case 0:
+                    this.myFood = new Apple(foodCell);
+                    this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
+                    break;
+                case 1:
+                    this.myFood = new Orange(foodCell);
+                    this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
+                    break;
+                case 2:
+                    this.myFood = new Banana(foodCell);
+                    this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
+                    break;
             }
-            else if (FoodTypes.values()[foodType].equals(FoodTypes.ORANGE)){
-                this.myFood = new Orange(food_cell);
-                this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
-            }
-            //System.out.println("Food added to board: " + this.my_food);
         }
+        return this.myFood;
     }
 
     /**
@@ -208,14 +176,14 @@ public class Board {
     public void printBoard(){
         for (int i = 0; i<this.boardSize; i++){
             for (int j = 0; j<this.boardSize; j++){
-                Cell this_cell = this.boardMap[i][j];
-                if (this_cell.getCellType().equals(CellType.NONE)){
+                Cell thisCell = this.boardMap[i][j];
+                if (thisCell.getCellType().equals(CellType.NONE)){
                     System.out.print('N');
                 }
-                else if (this_cell.getCellType().equals(CellType.SNAKE)){
+                else if (thisCell.getCellType().equals(CellType.SNAKE)){
                     System.out.print('S');
                 }
-                else if (this_cell.getCellType().equals(CellType.FOOD)) {
+                else if (thisCell.getCellType().equals(CellType.FOOD)) {
                     System.out.print('F');
                 }
                 else {
@@ -241,17 +209,17 @@ public class Board {
 
     @Override
     public String toString() {
-        StringBuilder board_map_toString = new StringBuilder();
+        StringBuilder boardMapToString = new StringBuilder();
         for (int i = 0; i<this.boardSize; i++){
             for (int j = 0; j<this.boardSize; j++){
-                board_map_toString.append(this.boardMap[i][j]).append(" |");
+                boardMapToString.append(this.boardMap[i][j]).append(" |");
             }
-            board_map_toString.append("===\n");
+            boardMapToString.append("===\n");
         }
 
         return "Board{" +
                 "boardSize=" + boardSize +
-                ", \nboardMap=" + board_map_toString +
+                ", \nboardMap=" + boardMapToString +
                 ", \nmySnake=" + mySnake +
                 ", \nmyFood=" + myFood +
                 '}';

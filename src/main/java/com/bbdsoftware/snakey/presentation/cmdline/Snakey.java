@@ -18,7 +18,7 @@ public class Snakey {
      * @param myBoard the board to add the food onto
      */
     public static void addFood(Board myBoard){
-        myBoard.addFood();
+        myBoard.getFood();
     }
 
     /**
