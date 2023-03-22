@@ -14,7 +14,7 @@ import java.util.Scanner;
 import static com.bbdsoftware.snakey.presentation.cmdline.Snakey.*;
 
 public class Menu {
-    Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+    Scanner myObj = new Scanner(System.in);;  // Create a Scanner object
     private Board myBoard;
     private final List<User> users = new ArrayList<>();
 
@@ -46,7 +46,8 @@ public class Menu {
      */
     private int get_board_size(){
         System.out.print("Enter a board size: ");
-        return this.myObj.nextInt();
+        Scanner myObj = new Scanner(System.in);
+        return myObj.nextInt();
     }
 
     /**
@@ -118,6 +119,7 @@ public class Menu {
      */
     private void displayGameDetails() {
         this.myBoard.printBoard();
+        //System.out.println(this.myBoard);
         System.out.println("Score: " + this.myBoard.getMySnake().getScore());
 
         if (!this.myBoard.getMySnake().getFoodItems().isEmpty()) {

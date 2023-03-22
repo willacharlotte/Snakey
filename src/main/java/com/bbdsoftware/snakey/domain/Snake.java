@@ -34,12 +34,54 @@ public class Snake {
         return this.head;
     }
 
+    public Cell moveSnake(Direction direction){
+        Cell head = this.head;
+        int x = head.getX(), y = head.getY();
+        if (this.snakeDirection.equals(direction) && direction.equals(Direction.UP)){
+            y -= 1;
+        }
+        else if (this.snakeDirection.equals(direction) && direction.equals(Direction.DOWN)){
+            y += 1;
+        }
+        else if (this.snakeDirection.equals(direction) && direction.equals(Direction.LEFT)){
+            x -= 1;
+        }
+        else if (this.snakeDirection.equals(direction) && direction.equals(Direction.RIGHT)){
+            x += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.UP) && direction.equals(Direction.LEFT)){
+            x -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.UP) && direction.equals(Direction.RIGHT)){
+            x += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.DOWN) && direction.equals(Direction.LEFT)){
+            x -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.DOWN) && direction.equals(Direction.RIGHT)){
+            x += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.RIGHT) && direction.equals(Direction.UP)){
+            y -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.RIGHT) && direction.equals(Direction.DOWN)){
+            y += 1;
+        }
+        else if (this.snakeDirection.equals(Direction.LEFT) && direction.equals(Direction.UP)){
+            y -= 1;
+        }
+        else if (this.snakeDirection.equals(Direction.LEFT) && direction.equals(Direction.DOWN)){
+            y += 1;
+        }
+        this.snakeDirection = direction;
+        return new Cell(x, y);
+    }
+
     /**
      * moves the snake and sets its direction
      * @param newCell the new cell for snake to move to
-     * @param direction the direction of the snake now
      */
-    public void moveSnake(Cell newCell, Direction direction){
+    public void moveSnake(Cell newCell){
         if (this.isAlive){
             //System.out.println("snake moves " + direction + " to " + newCell);
             if (this.currentLength < this.length) {
@@ -52,19 +94,17 @@ public class Snake {
                 this.snakeBlocks.add(newCell);
                 this.head = newCell;
             }
-            this.snakeDirection = direction;
         }
     }
 
     /**
      * the snake eats a food
      * @param newCell the new cell to move to
-     * @param direction the direction of movement
      * @param myFood the new food eaten
      */
-    public void moveSnake(Cell newCell, Direction direction, Food myFood){
+    public void moveSnake(Cell newCell, Food myFood){
         if (this.isAlive){
-            moveSnake(newCell, direction);
+            moveSnake(newCell);
             eatFood(myFood);
         }
     }
