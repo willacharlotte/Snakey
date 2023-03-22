@@ -103,7 +103,7 @@ public class Board {
      * move the snake on the board using the direction provided by the player
      * @param direction the direction to move the snake
      */
-    public void moveSnakeOnBoard(Direction direction){
+    public void processSnakeMovement(Direction direction){
         Cell newCell = this.mySnake.moveSnake(direction);
         //System.out.println("newCell: " + newCell);
 

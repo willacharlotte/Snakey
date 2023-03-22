@@ -51,8 +51,8 @@ public class Snakey {
      * @param myBoard the board the snake is on
      * @param userDirection the users input
      */
-    public static void moveSnakeOnBoard(Board myBoard, Direction userDirection) {
-        myBoard.moveSnakeOnBoard(userDirection);
+    public static void processSnakeMovement(Board myBoard, Direction userDirection) {
+        myBoard.processSnakeMovement(userDirection);
     }
 
     public static boolean validateUserInput(Board myBoard, Direction userInput){
