@@ -37,6 +37,7 @@ public class GameController extends JPanel implements ActionListener {
     BufferedImage snakeHeadUp, snakeHeadDown, snakeHeadLeft, snakeHeadRight;
     BufferedImage snakeTailUp, snakeTailDown, snakeTailLeft, snakeTailRight;
     BufferedImage apple, banana, pear, orange;
+    Font pixelFont;
 
     GameController() {
         snake = board.getMySnake();
@@ -44,11 +45,12 @@ public class GameController extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setFocusable(true);
         this.addKeyListener(new MovementController(snake));
+
         foodItem = board.getFood();
         foodX = foodItem.getFoodCell().getX();
         foodY = foodItem.getFoodCell().getY();
 
-        loadImages();
+        loadResources();
         timer.start();
         startGame();
     }
@@ -57,7 +59,7 @@ public class GameController extends JPanel implements ActionListener {
         moving = true;
     }
 
-    private void loadImages(){
+    private void loadResources(){
         try {
             snakeSegmentHorizontal = ImageIO.read(new File("src/main/java/assets/snakeSegmentHorizontal.png"));
             snakeSegmentVertical = ImageIO.read(new File("src/main/java/assets/snakeSegmentVertical.png"));
@@ -76,11 +78,22 @@ public class GameController extends JPanel implements ActionListener {
             banana = ImageIO.read(new File("src/main/java/assets/banana.png"));
             orange = ImageIO.read(new File("src/main/java/assets/orange.png"));
             pear = ImageIO.read(new File("src/main/java/assets/pear.png"));
-            
         } catch (IOException e) {
             // Add error handing here
         }
+
+        try {
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/assets/terminal-grotesque.ttf"));
+            pixelFont = pixelFont.deriveFont(60f); 
+        } catch (FontFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
@@ -155,11 +168,53 @@ public class GameController extends JPanel implements ActionListener {
 
     public void gameOver() {
         moving = false;
-        JLabel label = new JLabel("You lose");
-        label.setBounds(screenWidth/2, screenHeight/2, screenWidth/2, 100);
+        // TO DO: ADD HIGH SCORE HERE
+
+        JLabel label = new JLabel("Game Over");
+        label.setBounds(0, screenHeight/2-200, screenWidth, 100);
+        label.setFont(pixelFont);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBackground(Color.BLACK);
+        label.setForeground(Color.GREEN);        
         add(label);
+
+        JButton restartButton = new JButton("RESTART");
+        restartButton.setBounds(screenWidth/2-200, screenHeight/2-80, 400, 100);
+        restartButton.setFont(pixelFont);
+        restartButton.setHorizontalAlignment(SwingConstants.CENTER);
+        restartButton.setVerticalAlignment(SwingConstants.CENTER);
+        restartButton.setOpaque(true);
+        restartButton.setBackground(Color.BLACK);
+        restartButton.setForeground(Color.GREEN);  
+
+        add(restartButton);
+        restartButton.addActionListener(e -> {
+            new GameBoard();
+            closeThisFrame();
+        });
+
+        JButton quitButton = new JButton("QUIT");
+        quitButton.setBounds(screenWidth/2-200, screenHeight/2+40, 400, 100);
+        quitButton.setFont(pixelFont);
+        quitButton.setHorizontalAlignment(SwingConstants.CENTER);
+        quitButton.setVerticalAlignment(SwingConstants.CENTER);
+        quitButton.setOpaque(true);
+        quitButton.setBackground(Color.BLACK);
+        quitButton.setForeground(Color.GREEN);  
+        
+        add(quitButton);      
+        quitButton.addActionListener(e -> {
+            new MenuBoard();
+            closeThisFrame();
+        });
     }
 
+    private void closeThisFrame(){
+        // CLOSE THIS FRAME!!!???
+        // frame.dispose() not working
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
