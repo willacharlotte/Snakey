@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Leaderboard {
 
-    // String url = "jdbc:sqlserver://PalesaM\\SQLEXPRESS;databaseName=StatisticsDB;portNumber=1433;trustServerCertificate=true;integratedSecurity=true";
-    String url = "jdbc:sqlserver://localhost:1433;databaseName=StatisticsDB;portNumber=1433;trustServerCertificate=true;integratedSecurity=true";
+     String url = "jdbc:sqlserver://PalesaM\\SQLEXPRESS;databaseName=StatisticsDB;portNumber=1433;trustServerCertificate=true;integratedSecurity=true";
+    //String url = "jdbc:sqlserver://localhost:1433;databaseName=StatisticsDB;portNumber=1433;trustServerCertificate=true;integratedSecurity=true";
     //String user="ahgdmin";
     //String password = "passwor1d";
     Connection conn;
