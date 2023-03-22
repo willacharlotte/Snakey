@@ -84,7 +84,7 @@ public class Menu {
                 error = "Choose a movement to turn into a right angle";
                 continue;
             }
-            moveSnakeOnBoard(this.myBoard, userDirection);
+            processSnakeMovement(this.myBoard, userDirection);
 
             System.out.println();
             System.out.println();
