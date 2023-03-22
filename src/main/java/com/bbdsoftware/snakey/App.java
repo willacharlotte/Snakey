@@ -1,13 +1,10 @@
 package com.bbdsoftware.snakey;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import com.bbdsoftware.snakey.presentation.cmdline.Menu;
+
+public class App {
+    public static void main(String[] args) {
+        Menu menu = new Menu();
+        menu.newGame();
     }
 }
