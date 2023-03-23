@@ -9,15 +9,10 @@ public enum Audio {
     CRUNCH("crunch.wav"),
     DEATH("death.wav");
 
-    private AudioInputStream sound;
+    private String fileName;
 
     private Audio(String fileName) {
-        try {
-            File file = new File(getPath(fileName));
-            this.sound = AudioSystem.getAudioInputStream(file);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        this.fileName = fileName;
     }
 
     private String getPath(String fileName) {
@@ -25,6 +20,12 @@ public enum Audio {
     }
 
     public AudioInputStream getSound() {
-        return this.sound;
+        try {
+            File file = new File(getPath(fileName));
+            return AudioSystem.getAudioInputStream(file);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
