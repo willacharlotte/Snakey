@@ -11,7 +11,7 @@ public class Snake {
     private final List<Food> foodItems = new ArrayList<>();
     private boolean isAlive = true;
     private Direction snakeDirection = Direction.RIGHT;
-    private float score = 0F;
+    private int score = 0;
 
     public Snake(){
         this.length = 1;
@@ -174,7 +174,7 @@ public class Snake {
         return snakeDirection;
     }
 
-    public float getScore() {
+    public int getScore() {
         return score;
     }
 
