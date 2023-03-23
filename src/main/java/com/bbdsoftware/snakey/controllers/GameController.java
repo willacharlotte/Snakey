@@ -3,7 +3,9 @@ package com.bbdsoftware.snakey.controllers;
 import com.bbdsoftware.snakey.domain.Cell;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.domain.User;
 import com.bbdsoftware.snakey.presentation.GameFrame;
+import com.bbdsoftware.snakey.presentation.LeaderboardFrame;
 import com.bbdsoftware.snakey.presentation.MenuFrame;
 
 import javax.imageio.ImageIO;
@@ -203,9 +205,14 @@ public class GameController extends JPanel implements ActionListener {
             repaint();
 
 
-            // Add username + score to DB here
-            // USERNAME: nameField.getText();
-            // SCORE: snake.getScore();
+             //Add username + score to DB here
+            String userName= nameField.getText().toLowerCase();
+            int userScore= snake.getScore();
+
+            User user= new User(userName,userScore);
+            DatabaseController db = new DatabaseController();
+            db.addScore(user);
+            new LeaderboardFrame(user);
             
         });
 

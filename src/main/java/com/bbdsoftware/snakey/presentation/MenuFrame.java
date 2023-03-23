@@ -9,6 +9,8 @@ public class MenuFrame extends JFrame {
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }
