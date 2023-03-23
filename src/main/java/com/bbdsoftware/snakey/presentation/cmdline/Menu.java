@@ -1,10 +1,10 @@
 package com.bbdsoftware.snakey.presentation.cmdline;
 
 import com.bbdsoftware.snakey.controllers.BoardController;
-import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
 import com.bbdsoftware.snakey.domain.User;
 import com.bbdsoftware.snakey.enums.Direction;
+import com.bbdsoftware.snakey.enums.FoodTypes;
 import com.bbdsoftware.snakey.utils.ClearConsoleScreen;
 
 import java.util.ArrayList;
@@ -122,11 +122,8 @@ public class Menu {
         //System.out.println(this.myBoard);
         System.out.println("Score: " + this.myBoard.getMySnake().getScore());
 
-        if (!this.myBoard.getMySnake().getFoodItems().isEmpty()) {
-            System.out.println("Food items eaten: ");
-            for (Food food : myBoard.getMySnake().getFoodItems()) {
-                System.out.println("  " + food.getFoodType());
-            }
+        for (FoodTypes foodItem : FoodTypes.values()) {
+            System.out.println(foodItem + ": " + this.myBoard.getMySnake().getFoodItemCount(foodItem));
         }
     }
 
