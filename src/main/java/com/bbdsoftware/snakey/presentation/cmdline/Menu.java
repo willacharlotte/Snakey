@@ -176,7 +176,7 @@ public class Menu {
     private void displayGameEnded() {
         System.out.print("Enter your username: ");
         String username = myObj.nextLine();  // Read user input
-        User new_user = new User(username, this.myBoard.getMySnake().getScore());
+        User new_user = new User(username, (int)this.myBoard.getMySnake().getScore());
         this.users.add(new_user);
 
         System.out.println("High scores: " + this.users);
