@@ -32,6 +32,8 @@ public class MenuPanel extends JPanel {
         });
         leaderboardButton.addActionListener(e -> {
             System.out.println("clicked");
+            //get game board
+            new LeaderboardFrame(null);
         });
         quitButton.addActionListener(e -> {
             int input = JOptionPane.showConfirmDialog(null,
