@@ -1,16 +1,30 @@
 package com.bbdsoftware.snakey.enums;
 
+import java.io.File;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+
 public enum Audio {
     CRUNCH("crunch.wav"),
     DEATH("death.wav");
 
-    private String fileName;
+    private AudioInputStream sound;
 
     private Audio(String fileName) {
-        this.fileName = fileName;
+        try {
+            File file = new File(getPath(fileName));
+            this.sound = AudioSystem.getAudioInputStream(file);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public String getPath() {
-        return getClass().getResource(fileName).getFile();
+    private String getPath(String fileName) {
+        return "src/main/resources/" + fileName;
+    }
+
+    public AudioInputStream getSound() {
+        return this.sound;
     }
 }
