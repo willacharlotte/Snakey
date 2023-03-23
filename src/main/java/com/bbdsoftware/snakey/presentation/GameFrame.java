@@ -1,7 +1,6 @@
 package com.bbdsoftware.snakey.presentation;
 
 import javax.swing.*;
-
 import com.bbdsoftware.snakey.controllers.GameController;
 
 import java.awt.event.WindowAdapter;
@@ -14,6 +13,7 @@ public class GameFrame extends JFrame {
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
+        this.setLocation(0,0);
 
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
