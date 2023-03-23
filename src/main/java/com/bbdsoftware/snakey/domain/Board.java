@@ -165,7 +165,11 @@ public class Board {
                     this.myFood = new Banana(foodCell);
                     this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
                     break;
-            }
+                case 3:
+                    this.myFood = new Pear(foodCell);
+                    this.boardMap[int_y][int_x].setCellType(CellType.FOOD);
+                    break;
+                }
         }
         return this.myFood;
     }

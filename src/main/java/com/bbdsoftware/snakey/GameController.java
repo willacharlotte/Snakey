@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +39,7 @@ public class GameController extends JPanel implements ActionListener {
     BufferedImage snakeHeadUp, snakeHeadDown, snakeHeadLeft, snakeHeadRight;
     BufferedImage snakeTailUp, snakeTailDown, snakeTailLeft, snakeTailRight;
     BufferedImage apple, banana, pear, orange;
-    Font pixelFont;
+    Font pixelFontLarge, pixelFontSmall;
 
     GameController() {
         snake = board.getMySnake();
@@ -83,8 +85,9 @@ public class GameController extends JPanel implements ActionListener {
         }
 
         try {
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/assets/terminal-grotesque.ttf"));
-            pixelFont = pixelFont.deriveFont(60f); 
+            pixelFontLarge = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/assets/terminal-grotesque.ttf"));
+            pixelFontLarge = pixelFontLarge.deriveFont(60f); 
+            pixelFontSmall = pixelFontLarge.deriveFont(20f);
         } catch (FontFormatException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -170,47 +173,128 @@ public class GameController extends JPanel implements ActionListener {
         moving = false;
         // TO DO: ADD HIGH SCORE HERE
 
-        JLabel label = new JLabel("Game Over");
-        label.setBounds(0, screenHeight/2-200, screenWidth, 100);
-        label.setFont(pixelFont);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setVerticalAlignment(SwingConstants.CENTER);
-        label.setOpaque(true);
-        label.setBackground(Color.BLACK);
-        label.setForeground(Color.GREEN);        
-        add(label);
-
+        JButton quitButton = new JButton("QUIT");
+        JLabel gameOverLabel = new JLabel("Game Over");
+        JLabel nameLabel = new JLabel("ENTER YOUR NAME:");
+        JTextField nameField = new JTextField(10);
+        JButton submitNameButton = new JButton("SUBMIT");
         JButton restartButton = new JButton("RESTART");
-        restartButton.setBounds(screenWidth/2-200, screenHeight/2-80, 400, 100);
-        restartButton.setFont(pixelFont);
-        restartButton.setHorizontalAlignment(SwingConstants.CENTER);
-        restartButton.setVerticalAlignment(SwingConstants.CENTER);
-        restartButton.setOpaque(true);
-        restartButton.setBackground(Color.BLACK);
-        restartButton.setForeground(Color.GREEN);  
+        addEnterUsernameFields(gameOverLabel, nameLabel, nameField, submitNameButton);
+    
+        submitNameButton.setEnabled(false);
 
-        add(restartButton);
+        nameField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent event){
+                String content = nameField.getText();
+                if(!content.equals("")){
+                    submitNameButton.setEnabled(true);
+                }else{
+                    submitNameButton.setEnabled(false);
+                }
+            }
+        });
+
+        submitNameButton.addActionListener(e -> {
+            removeJFrameComponent(nameLabel);
+            removeJFrameComponent(nameField);
+            removeJFrameComponent(submitNameButton);
+            addEndOfGameFields(restartButton, quitButton);
+            repaint();
+            // Add name to DB here
+            
+        });
+
         restartButton.addActionListener(e -> {
             new GameBoard();
             closeThisFrame();
         });
 
-        JButton quitButton = new JButton("QUIT");
-        quitButton.setBounds(screenWidth/2-200, screenHeight/2+40, 400, 100);
-        quitButton.setFont(pixelFont);
-        quitButton.setHorizontalAlignment(SwingConstants.CENTER);
-        quitButton.setVerticalAlignment(SwingConstants.CENTER);
-        quitButton.setOpaque(true);
-        quitButton.setBackground(Color.BLACK);
-        quitButton.setForeground(Color.GREEN);  
+ 
         
-        add(quitButton);      
         quitButton.addActionListener(e -> {
             new MenuBoard();
             closeThisFrame();
         });
     }
 
+    private void addEnterUsernameFields(JLabel gameOverLabel, JLabel nameLabel, JTextField nameField, JButton submitNameButton){
+        gameOverLabel.setBounds(0, screenHeight/2-300, screenWidth, 100);
+        gameOverLabel.setFont(pixelFontLarge);
+        gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        gameOverLabel.setVerticalAlignment(SwingConstants.CENTER);
+        gameOverLabel.setOpaque(true);
+        gameOverLabel.setBackground(Color.BLACK);
+        gameOverLabel.setForeground(Color.GREEN);   
+        add(gameOverLabel);
+
+        nameLabel.setBounds(115, screenHeight/2-175, 200, 50);
+        nameLabel.setFont(pixelFontSmall);
+        nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        nameLabel.setVerticalAlignment(SwingConstants.CENTER);
+        nameLabel.setOpaque(true);
+        nameLabel.setBackground(Color.GRAY);
+        nameLabel.setForeground(Color.BLACK);  
+        add(nameLabel);
+
+        nameField.setBounds(335, screenHeight/2-175, 300, 50);
+        nameField.setFont(pixelFontSmall);
+        nameField.setHorizontalAlignment(SwingConstants.LEFT);
+        nameField.setOpaque(true);
+        nameField.setBackground(Color.WHITE);
+        nameField.setForeground(Color.BLACK); 
+        nameField.setMargin(new Insets(0, 20, 0, 0));
+        add(nameField);
+
+        submitNameButton.setBounds(screenWidth/2-150, screenHeight/2-100, 300, 80);
+        submitNameButton.setFont(pixelFontLarge);
+        submitNameButton.setHorizontalAlignment(SwingConstants.CENTER);
+        submitNameButton.setVerticalAlignment(SwingConstants.CENTER);
+        submitNameButton.setOpaque(true);
+        submitNameButton.setBackground(Color.BLACK);
+        submitNameButton.setForeground(Color.GREEN); 
+        add(submitNameButton);
+    }
+
+
+    private void addEndOfGameFields(JButton restartButton, JButton quitButton){
+        restartButton.setBounds(screenWidth/2-200, screenHeight/2-175, 400, 100);
+        restartButton.setFont(pixelFontLarge);
+        restartButton.setHorizontalAlignment(SwingConstants.CENTER);
+        restartButton.setVerticalAlignment(SwingConstants.CENTER);
+        restartButton.setOpaque(true);
+        restartButton.setBackground(Color.BLACK);
+        restartButton.setForeground(Color.GREEN);  
+        add(restartButton);
+
+        quitButton.setBounds(screenWidth/2-200, screenHeight/2-50, 400, 100);
+        quitButton.setFont(pixelFontLarge);
+        quitButton.setHorizontalAlignment(SwingConstants.CENTER);
+        quitButton.setVerticalAlignment(SwingConstants.CENTER);
+        quitButton.setOpaque(true);
+        quitButton.setBackground(Color.BLACK);
+        quitButton.setForeground(Color.GREEN); 
+        add(quitButton);
+    }
+
+    
+    private void removeJFrameComponent(JButton... buttons){
+        for (JButton jButton : buttons) {
+            remove(jButton);            
+        }
+    }
+
+    private void removeJFrameComponent(JLabel... labels){
+        for (JLabel jLabel : labels) {
+            remove(jLabel);            
+        }
+    }
+
+    private void removeJFrameComponent(JTextField... textFields){
+        for (JTextField jTextField : textFields) {
+            remove(jTextField);
+        }
+    }
     private void closeThisFrame(){
         // CLOSE THIS FRAME!!!???
         // frame.dispose() not working

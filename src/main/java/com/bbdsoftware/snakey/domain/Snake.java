@@ -111,7 +111,10 @@ public class Snake {
     }
 
     public boolean isValidTurn(Direction nextDirection){
-        if (nextDirection.equals(this.snakeDirection)){
+        if(currentLength == 1){
+            return true;
+        }
+        else if (nextDirection.equals(this.snakeDirection)){
             return true;
         }
         else if ((nextDirection.equals(Direction.DOWN) || nextDirection.equals(Direction.UP)) &&

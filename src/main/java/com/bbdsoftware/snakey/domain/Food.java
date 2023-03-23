@@ -5,14 +5,14 @@ import com.bbdsoftware.snakey.enums.FoodTypes;
 
 public abstract class Food{
     private FoodTypes foodType;
-    private float score;
+    private int score;
     private Color foodColour;
     private int length;
     private Cell foodCell;
 
     public Food(){ }
 
-    protected Food(FoodTypes foodType, float score, Color foodColour, int length, Cell foodCell){
+    protected Food(FoodTypes foodType, int score, Color foodColour, int length, Cell foodCell){
         this.foodType = foodType;
         this.score = score;
         this.foodColour = foodColour;

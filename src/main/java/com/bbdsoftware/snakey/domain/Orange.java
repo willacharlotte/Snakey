@@ -5,7 +5,7 @@ import com.bbdsoftware.snakey.enums.FoodTypes;
 
 public class Orange  extends Food{
     public Orange(Cell foodCell){
-        super(FoodTypes.ORANGE, 0.9F, Color.orange, 5, foodCell);
+        super(FoodTypes.ORANGE, 50, Color.orange, 5, foodCell);
     }
 
     @Override
