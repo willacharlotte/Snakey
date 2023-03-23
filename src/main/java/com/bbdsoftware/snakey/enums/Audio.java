@@ -16,7 +16,7 @@ public enum Audio {
     }
 
     private String getPath(String fileName) {
-        return "src/main/resources/" + fileName;
+        return "resources/" + fileName;
     }
 
     public AudioInputStream getSound() {
