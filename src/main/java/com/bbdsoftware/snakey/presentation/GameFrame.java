@@ -1,8 +1,10 @@
-package com.bbdsoftware.snakey;
+package com.bbdsoftware.snakey.presentation;
 import javax.swing.*;
 
-public class GameBoard extends JFrame {
-    public GameBoard() {
+import com.bbdsoftware.snakey.controllers.GameController;
+
+public class GameFrame extends JFrame {
+    public GameFrame() {
         this.add(new GameController());
         this.setTitle("Snake");
         this.setResizable(false);

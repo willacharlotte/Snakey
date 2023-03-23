@@ -1,6 +1,6 @@
 package com.bbdsoftware.snakey.presentation.cmdline;
 
-import com.bbdsoftware.snakey.domain.Board;
+import com.bbdsoftware.snakey.controllers.BoardController;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
 import com.bbdsoftware.snakey.domain.User;
@@ -15,7 +15,7 @@ import static com.bbdsoftware.snakey.presentation.cmdline.Snakey.*;
 
 public class Menu {
     Scanner myObj = new Scanner(System.in);;  // Create a Scanner object
-    private Board myBoard;
+    private BoardController myBoard;
     private final List<User> users = new ArrayList<>();
 
     public Menu(){ }

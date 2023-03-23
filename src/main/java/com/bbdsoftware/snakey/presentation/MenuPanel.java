@@ -1,14 +1,15 @@
-package com.bbdsoftware.snakey;
+package com.bbdsoftware.snakey.presentation;
 
 import javax.swing.*;
+
 import java.awt.*;
 
-public class Menu extends JPanel {
+public class MenuPanel extends JPanel {
     JButton startButton = new JButton("Start Game");
     JButton quitButton = new JButton("Quit");
     JButton leaderboardButton = new JButton("Leaderboard");
 
-    Menu() {
+    MenuPanel() {
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(600, 600));
         this.setFocusable(true);
@@ -28,7 +29,7 @@ public class Menu extends JPanel {
 
         startButton.addActionListener(e -> {
             //get game board
-            new GameBoard();
+            new GameFrame();
         });
         leaderboardButton.addActionListener(e -> {
             System.out.println("clicked");

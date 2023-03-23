@@ -1,10 +1,10 @@
-package com.bbdsoftware.snakey;
+package com.bbdsoftware.snakey.controllers;
 
-import com.bbdsoftware.snakey.controllers.MovementController;
 import com.bbdsoftware.snakey.domain.Cell;
-import com.bbdsoftware.snakey.domain.Board;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.presentation.GameFrame;
+import com.bbdsoftware.snakey.presentation.MenuFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class GameController extends JPanel implements ActionListener {
     static final int screenHeight = numBlocks*blockUnit;
     
     Random random = new Random();
-    Board board = new Board(numBlocks);
+    BoardController board = new BoardController(numBlocks);
     Snake snake;
     Food foodItem;
     int foodX, foodY;
@@ -41,7 +41,7 @@ public class GameController extends JPanel implements ActionListener {
     BufferedImage apple, banana, pear, orange;
     Font pixelFontLarge, pixelFontSmall;
 
-    GameController() {
+    public GameController() {
         snake = board.getMySnake();
         this.setBackground(Color.gray);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -201,19 +201,23 @@ public class GameController extends JPanel implements ActionListener {
             removeJFrameComponent(submitNameButton);
             addEndOfGameFields(restartButton, quitButton);
             repaint();
-            // Add name to DB here
+
+
+            // Add username + score to DB here
+            // USERNAME: nameField.getText();
+            // SCORE: snake.getScore();
             
         });
 
         restartButton.addActionListener(e -> {
-            new GameBoard();
+            new GameFrame();
             closeParentFrame();
         });
 
  
         
         quitButton.addActionListener(e -> {
-            new MenuBoard();
+            new MenuFrame();
             closeParentFrame();
         });
     }

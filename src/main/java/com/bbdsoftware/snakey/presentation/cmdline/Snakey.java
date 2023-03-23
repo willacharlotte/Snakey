@@ -1,6 +1,6 @@
 package com.bbdsoftware.snakey.presentation.cmdline;
 
-import com.bbdsoftware.snakey.domain.Board;
+import com.bbdsoftware.snakey.controllers.BoardController;
 import com.bbdsoftware.snakey.enums.Direction;
 
 public class Snakey {
@@ -9,15 +9,15 @@ public class Snakey {
      * @param boardSize the size of the board
      * @return the created Board
      */
-    public static Board createBoard(int boardSize){
-        return new Board(boardSize);
+    public static BoardController createBoard(int boardSize){
+        return new BoardController(boardSize);
     }
 
     /**
      * adds food to the board
      * @param myBoard the board to add the food onto
      */
-    public static void addFood(Board myBoard){
+    public static void addFood(BoardController myBoard){
         myBoard.getFood();
     }
 
@@ -51,11 +51,11 @@ public class Snakey {
      * @param myBoard the board the snake is on
      * @param userDirection the users input
      */
-    public static void processSnakeMovement(Board myBoard, Direction userDirection) {
+    public static void processSnakeMovement(BoardController myBoard, Direction userDirection) {
         myBoard.processSnakeMovement(userDirection);
     }
 
-    public static boolean validateUserInput(Board myBoard, Direction userInput){
+    public static boolean validateUserInput(BoardController myBoard, Direction userInput){
         return myBoard.isValidMoveForSnake(userInput);
     }
 }

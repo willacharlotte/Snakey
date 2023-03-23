@@ -1,17 +1,24 @@
-package com.bbdsoftware.snakey.domain;
+package com.bbdsoftware.snakey.controllers;
 
+import com.bbdsoftware.snakey.domain.Apple;
+import com.bbdsoftware.snakey.domain.Banana;
+import com.bbdsoftware.snakey.domain.Cell;
+import com.bbdsoftware.snakey.domain.Food;
+import com.bbdsoftware.snakey.domain.Orange;
+import com.bbdsoftware.snakey.domain.Pear;
+import com.bbdsoftware.snakey.domain.Snake;
 import com.bbdsoftware.snakey.enums.CellType;
 import com.bbdsoftware.snakey.enums.Direction;
 import com.bbdsoftware.snakey.enums.FoodTypes;
 import java.util.Random;
 
-public class Board {
+public class BoardController {
     private final int boardSize;
     private Cell[][] boardMap;
     private final Snake mySnake = new Snake();
     private Food myFood;
 
-    public Board(int boardSize) throws IllegalArgumentException{
+    public BoardController(int boardSize) throws IllegalArgumentException{
         if(boardSize % 2 == 0){
             throw new IllegalArgumentException("Board size should be odd number!");
         }
