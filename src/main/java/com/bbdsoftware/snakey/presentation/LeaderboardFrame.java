@@ -1,7 +1,5 @@
 package com.bbdsoftware.snakey.presentation;
-
 import com.bbdsoftware.snakey.domain.User;
-
 import javax.swing.*;
 
 public class LeaderboardFrame extends JFrame{
@@ -12,7 +10,6 @@ public class LeaderboardFrame extends JFrame{
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
+        this.setLocation(0,0);
     }
-
-
 }

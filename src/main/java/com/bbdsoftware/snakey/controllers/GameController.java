@@ -3,11 +3,14 @@ package com.bbdsoftware.snakey.controllers;
 import com.bbdsoftware.snakey.domain.Cell;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.enums.FoodTypes;
 import com.bbdsoftware.snakey.presentation.GameFrame;
 import com.bbdsoftware.snakey.presentation.MenuFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,11 +23,12 @@ import java.util.Random;
 
 public class GameController extends JPanel implements ActionListener {
 
-    static final int numBlocks = 15;
+    static final int numBlocks = 13;
     static final int blockUnit = 50;
     static final int snakeUnit = 50;
+    static final int headingOffsetY = 100;
     static final int screenWidth = numBlocks*blockUnit;
-    static final int screenHeight = numBlocks*blockUnit;
+    static final int screenHeight = numBlocks*blockUnit + headingOffsetY;
     
     Random random = new Random();
     BoardController board = new BoardController(numBlocks);
@@ -103,47 +107,50 @@ public class GameController extends JPanel implements ActionListener {
     }
 
     private void draw(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, screenWidth, headingOffsetY);
+
         int snakeCount = 0;
         for(Cell s : snake.getSnakeBlocks()){
             if(snakeCount == snake.getCurrentLength()-1){
                 switch(s.getCellDirection()){
                     case DOWN:
-                        g.drawImage(snakeHeadDown, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeHeadDown, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case UP:
-                        g.drawImage(snakeHeadUp, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeHeadUp, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case LEFT:
-                        g.drawImage(snakeHeadLeft, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeHeadLeft, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case RIGHT:
-                        g.drawImage(snakeHeadRight, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeHeadRight, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                 }
             }else if(snakeCount == 0){
                 switch(s.getCellDirection()){
                     case DOWN:
-                        g.drawImage(snakeTailDown, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeTailDown, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case UP:
-                        g.drawImage(snakeTailUp, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeTailUp, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case LEFT:
-                        g.drawImage(snakeTailLeft, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeTailLeft, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case RIGHT:
-                        g.drawImage(snakeTailRight, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeTailRight, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                 }
             }else{
                 switch(s.getCellDirection()){
                     case DOWN:
                     case UP:
-                        g.drawImage(snakeSegmentVertical, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeSegmentVertical, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                     case LEFT:
                     case RIGHT:
-                        g.drawImage(snakeSegmentHorizontal, s.getX()*blockUnit, s.getY()*blockUnit, snakeUnit, snakeUnit, null);         
+                        g.drawImage(snakeSegmentHorizontal, s.getX()*blockUnit, s.getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);         
                         break;
                 }            }
             snakeCount++;
@@ -153,18 +160,46 @@ public class GameController extends JPanel implements ActionListener {
         if(foodItem != null){
             switch(foodItem.getFoodType()){
                 case APPLE:
-                    g.drawImage(apple, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit, snakeUnit, snakeUnit, null);
+                    g.drawImage(apple, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
                 case BANANA:
-                    g.drawImage(banana, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit, snakeUnit, snakeUnit, null);
+                    g.drawImage(banana, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
                 case PEAR:
-                    g.drawImage(pear, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit, snakeUnit, snakeUnit, null);
+                    g.drawImage(pear, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
                 case ORANGE:
-                    g.drawImage(orange, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit, snakeUnit, snakeUnit, null);
+                    g.drawImage(orange, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
             }
+        }
+   
+        int foodScoreX = 50;
+        for(FoodTypes f : FoodTypes.values()){
+            switch(f){
+                case APPLE:
+                    g.drawImage(apple, foodScoreX, 25, blockUnit, blockUnit, null);
+                    break;
+                case BANANA:
+                    g.drawImage(banana, foodScoreX, 25, blockUnit, blockUnit, null);
+                    break;
+                case PEAR:
+                    g.drawImage(pear, foodScoreX, 25, blockUnit, blockUnit, null);
+                    break;
+                case ORANGE:
+                    g.drawImage(orange, foodScoreX, 25, blockUnit, blockUnit, null);
+                    break;
+            }
+            foodScoreX+=50;
+            JLabel foodLabel = new JLabel(" x 0");
+            foodLabel.setBounds(foodScoreX, 25, 50, 50);
+            foodLabel.setFont(pixelFontSmall);
+            foodLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            foodLabel.setVerticalAlignment(SwingConstants.CENTER);
+            foodLabel.setOpaque(false);
+            foodLabel.setForeground(Color.GREEN);
+            add(foodLabel);
+            foodScoreX += 100;
         }
     }
 
@@ -178,8 +213,10 @@ public class GameController extends JPanel implements ActionListener {
         JTextField nameField = new JTextField(10);
         JButton submitNameButton = new JButton("SUBMIT");
         JButton restartButton = new JButton("RESTART");
-        addEnterUsernameFields(quitButton, gameOverLabel, nameLabel, nameField, submitNameButton);
-    
+        JLabel scoreLabel = new JLabel("SCORE: " + snake.getScore());
+        addEnterUsernameFields(scoreLabel, quitButton, gameOverLabel, nameLabel, nameField, submitNameButton);
+        //addFoodScoreFields();
+
         submitNameButton.setEnabled(false);
 
         nameField.addKeyListener(new KeyAdapter() {
@@ -221,8 +258,8 @@ public class GameController extends JPanel implements ActionListener {
         });
     }
 
-    private void addEnterUsernameFields(JButton quitButton, JLabel gameOverLabel, JLabel nameLabel, JTextField nameField, JButton submitNameButton){
-        gameOverLabel.setBounds(0, screenHeight/2-300, screenWidth, 100);
+    private void addEnterUsernameFields(JLabel scoreLabel, JButton quitButton, JLabel gameOverLabel, JLabel nameLabel, JTextField nameField, JButton submitNameButton){
+        gameOverLabel.setBounds(0, screenHeight/2-200, screenWidth, 100);
         gameOverLabel.setFont(pixelFontLarge);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -231,26 +268,35 @@ public class GameController extends JPanel implements ActionListener {
         gameOverLabel.setForeground(Color.GREEN);   
         add(gameOverLabel);
 
-        nameLabel.setBounds(115, screenHeight/2-175, 200, 50);
+        scoreLabel.setBounds(screenWidth/2-200, screenHeight/2-75, 400, 50);
+        scoreLabel.setFont(pixelFontLarge);
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        scoreLabel.setVerticalAlignment(SwingConstants.CENTER);
+        scoreLabel.setOpaque(true);
+        scoreLabel.setBackground(Color.GRAY);
+        scoreLabel.setForeground(Color.BLACK);  
+        add(scoreLabel);
+
+        nameLabel.setBounds(0, screenHeight/2, 210, 50);
         nameLabel.setFont(pixelFontSmall);
-        nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         nameLabel.setVerticalAlignment(SwingConstants.CENTER);
         nameLabel.setOpaque(true);
         nameLabel.setBackground(Color.GRAY);
         nameLabel.setForeground(Color.BLACK);  
         add(nameLabel);
 
-        nameField.setBounds(335, screenHeight/2-175, 300, 50);
+        nameField.setBounds(235, screenHeight/2, 200, 50);
         nameField.setFont(pixelFontSmall);
         nameField.setHorizontalAlignment(SwingConstants.LEFT);
         nameField.setOpaque(true);
         nameField.setBackground(Color.WHITE);
         nameField.setForeground(Color.BLACK); 
-        nameField.setMargin(new Insets(0, 20, 0, 0));
+        nameField.setMargin(new Insets(0, 15, 0, 0));
         add(nameField);
 
-        submitNameButton.setBounds(screenWidth/2-150, screenHeight/2-100, 300, 80);
-        submitNameButton.setFont(pixelFontLarge);
+        submitNameButton.setBounds(460, screenHeight/2, 150, 50);
+        submitNameButton.setFont(pixelFontSmall);
         submitNameButton.setHorizontalAlignment(SwingConstants.CENTER);
         submitNameButton.setVerticalAlignment(SwingConstants.CENTER);
         submitNameButton.setOpaque(true);
@@ -258,7 +304,7 @@ public class GameController extends JPanel implements ActionListener {
         submitNameButton.setForeground(Color.GREEN); 
         add(submitNameButton);
 
-        quitButton.setBounds(screenWidth/2-150, screenHeight/2, 300, 80);
+        quitButton.setBounds(screenWidth/2-150, screenHeight-250, 300, 80);
         quitButton.setFont(pixelFontLarge);
         quitButton.setHorizontalAlignment(SwingConstants.CENTER);
         quitButton.setVerticalAlignment(SwingConstants.CENTER);
@@ -267,7 +313,6 @@ public class GameController extends JPanel implements ActionListener {
         quitButton.setForeground(Color.GREEN); 
         add(quitButton);
     }
-
 
     private void addEndOfGameFields(JButton restartButton, JButton quitButton){
         restartButton.setBounds(screenWidth/2-200, screenHeight/2-175, 400, 100);
