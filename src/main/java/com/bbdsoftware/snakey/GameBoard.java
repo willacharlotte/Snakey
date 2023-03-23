@@ -9,4 +9,8 @@ public class GameBoard extends JFrame {
         this.pack();
         this.setVisible(true);
     }
+
+    // public void closeThisFrame(){
+    //     this.dispose();
+    // }
 }

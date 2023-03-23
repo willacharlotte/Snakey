@@ -207,14 +207,14 @@ public class GameController extends JPanel implements ActionListener {
 
         restartButton.addActionListener(e -> {
             new GameBoard();
-            closeThisFrame();
+            closeParentFrame();
         });
 
  
         
         quitButton.addActionListener(e -> {
             new MenuBoard();
-            closeThisFrame();
+            closeParentFrame();
         });
     }
 
@@ -295,9 +295,9 @@ public class GameController extends JPanel implements ActionListener {
             remove(jTextField);
         }
     }
-    private void closeThisFrame(){
-        // CLOSE THIS FRAME!!!???
-        // frame.dispose() not working
+    private void closeParentFrame(){
+        final Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        parentWindow.dispose();
     }
 
     @Override
