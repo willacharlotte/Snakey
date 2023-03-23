@@ -10,9 +10,10 @@ import javax.sound.sampled.LineUnavailableException;
 import com.bbdsoftware.snakey.enums.Audio;
 
 public class AudioController {
+    public final static AudioController AUDIO_CONTROLLER = new AudioController();
     private final HashMap<String, Clip> clips = new HashMap<>();
 
-    public AudioController() {
+    private AudioController() {
         try {
             for (Audio audio : Audio.values()) {
                 clips.put(audio.name(), AudioSystem.getClip());
