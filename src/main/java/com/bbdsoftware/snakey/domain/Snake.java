@@ -1,5 +1,7 @@
 package com.bbdsoftware.snakey.domain;
 import com.bbdsoftware.snakey.enums.Direction;
+import com.bbdsoftware.snakey.enums.FoodTypes;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,6 +146,20 @@ public class Snake {
         this.length += food.getLength();
         this.score += food.getScore();
         this.foodItems.add(food);
+    }
+
+    /**
+     * get count of the foodItem
+     * @param foodType the foodItem to get the count of
+     * @return the count of the foodItem
+     */
+    public int getFoodItemCount(FoodTypes foodType){
+        int countFood = 0;
+        for (Food food : foodItems){
+            if (food.getFoodType().equals(foodType))
+                countFood++;
+        }
+        return countFood;
     }
 
     public void setSnakeDirection(Direction snakeDirection) {

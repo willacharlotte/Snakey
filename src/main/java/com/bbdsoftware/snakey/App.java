@@ -1,4 +1,5 @@
 package com.bbdsoftware.snakey;
+
 import com.bbdsoftware.snakey.presentation.MenuFrame;
 
 public class App {
