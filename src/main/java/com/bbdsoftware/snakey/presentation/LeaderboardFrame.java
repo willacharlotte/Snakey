@@ -1,4 +1,4 @@
-package com.bbdsoftware.snakey;
+package com.bbdsoftware.snakey.presentation;
 
 import com.bbdsoftware.snakey.domain.User;
 

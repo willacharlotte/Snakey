@@ -1,4 +1,4 @@
-package com.bbdsoftware.snakey;
+package com.bbdsoftware.snakey.controllers;
 
 import com.bbdsoftware.snakey.domain.User;
 
@@ -12,7 +12,7 @@ public class DatabaseController {
     Statement statement;
     ResultSet results;
 
-    DatabaseController(){
+    public DatabaseController(){
     }
 
     /**

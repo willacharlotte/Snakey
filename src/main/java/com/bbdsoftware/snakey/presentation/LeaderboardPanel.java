@@ -1,5 +1,6 @@
-package com.bbdsoftware.snakey;
+package com.bbdsoftware.snakey.presentation;
 
+import com.bbdsoftware.snakey.controllers.DatabaseController;
 import com.bbdsoftware.snakey.domain.User;
 
 import javax.swing.*;
