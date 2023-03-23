@@ -15,7 +15,7 @@ public class MenuPanel extends JPanel {
     JLabel heading = new JLabel("SNAKEY");
     Font pixelFontLarge, pixelFontSmall, pixelFontExtraLarge;
     BufferedImage snakeImage;
-    
+
     MenuPanel() {
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(600, 600));
@@ -31,9 +31,8 @@ public class MenuPanel extends JPanel {
             closeParentFrame();
         });
         leaderboardButton.addActionListener(e -> {
-            System.out.println("clicked");
-            //get game board
             new LeaderboardFrame(null);
+            closeParentFrame();
         });
         quitButton.addActionListener(e -> {
             int input = JOptionPane.showConfirmDialog(null,
@@ -59,7 +58,7 @@ public class MenuPanel extends JPanel {
         heading.setVerticalAlignment(SwingConstants.CENTER);
         heading.setOpaque(true);
         heading.setBackground(Color.BLACK);
-        heading.setForeground(Color.GREEN);   
+        heading.setForeground(Color.GREEN);
         add(heading);
 
         startButton.setBounds(100, 280, 400, 80);
@@ -68,7 +67,7 @@ public class MenuPanel extends JPanel {
         startButton.setVerticalAlignment(SwingConstants.CENTER);
         startButton.setOpaque(true);
         startButton.setBackground(Color.BLACK);
-        startButton.setForeground(Color.GREEN); 
+        startButton.setForeground(Color.GREEN);
         add(startButton);
 
         leaderboardButton.setBounds(100, 380, 400, 80);
@@ -77,7 +76,7 @@ public class MenuPanel extends JPanel {
         leaderboardButton.setVerticalAlignment(SwingConstants.CENTER);
         leaderboardButton.setOpaque(true);
         leaderboardButton.setBackground(Color.BLACK);
-        leaderboardButton.setForeground(Color.GREEN); 
+        leaderboardButton.setForeground(Color.GREEN);
         add(leaderboardButton);
 
         quitButton.setBounds(100, 480, 400, 80);
@@ -86,7 +85,7 @@ public class MenuPanel extends JPanel {
         quitButton.setVerticalAlignment(SwingConstants.CENTER);
         quitButton.setOpaque(true);
         quitButton.setBackground(Color.BLACK);
-        quitButton.setForeground(Color.GREEN); 
+        quitButton.setForeground(Color.GREEN);
         add(quitButton);
     }
 
@@ -95,7 +94,7 @@ public class MenuPanel extends JPanel {
         parentWindow.dispose();
     }
 
-    
+
     private void loadResources(){
         try {
             snakeImage = ImageIO.read(new File("resources/snek.png"));
@@ -104,7 +103,7 @@ public class MenuPanel extends JPanel {
         }
         try {
             pixelFontLarge = Font.createFont(Font.TRUETYPE_FONT, new File("resources/terminal-grotesque.ttf"));
-            pixelFontLarge = pixelFontLarge.deriveFont(60f); 
+            pixelFontLarge = pixelFontLarge.deriveFont(60f);
             pixelFontSmall = pixelFontLarge.deriveFont(20f);
             pixelFontExtraLarge = pixelFontLarge.deriveFont(120f);
         } catch (FontFormatException e) {
