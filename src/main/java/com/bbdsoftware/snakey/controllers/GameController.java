@@ -63,29 +63,29 @@ public class GameController extends JPanel implements ActionListener {
 
     private void loadResources(){
         try {
-            snakeSegmentHorizontal = ImageIO.read(new File("src/main/java/assets/snakeSegmentHorizontal.png"));
-            snakeSegmentVertical = ImageIO.read(new File("src/main/java/assets/snakeSegmentVertical.png"));
+            snakeSegmentHorizontal = ImageIO.read(new File("resources/snakeSegmentHorizontal.png"));
+            snakeSegmentVertical = ImageIO.read(new File("resources/snakeSegmentVertical.png"));
             
-            snakeHeadUp = ImageIO.read(new File("src/main/java/assets/snakeHeadUp.png"));
-            snakeHeadDown = ImageIO.read(new File("src/main/java/assets/snakeHeadDown.png"));
-            snakeHeadLeft = ImageIO.read(new File("src/main/java/assets/snakeHeadLeft.png"));
-            snakeHeadRight = ImageIO.read(new File("src/main/java/assets/snakeHeadRight.png"));
+            snakeHeadUp = ImageIO.read(new File("resources/snakeHeadUp.png"));
+            snakeHeadDown = ImageIO.read(new File("resources/snakeHeadDown.png"));
+            snakeHeadLeft = ImageIO.read(new File("resources/snakeHeadLeft.png"));
+            snakeHeadRight = ImageIO.read(new File("resources/snakeHeadRight.png"));
             
-            snakeTailUp = ImageIO.read(new File("src/main/java/assets/snakeTailUp.png"));
-            snakeTailDown = ImageIO.read(new File("src/main/java/assets/snakeTailDown.png"));
-            snakeTailLeft = ImageIO.read(new File("src/main/java/assets/snakeTailLeft.png"));
-            snakeTailRight = ImageIO.read(new File("src/main/java/assets/snakeTailRight.png"));
+            snakeTailUp = ImageIO.read(new File("resources/snakeTailUp.png"));
+            snakeTailDown = ImageIO.read(new File("resources/snakeTailDown.png"));
+            snakeTailLeft = ImageIO.read(new File("resources/snakeTailLeft.png"));
+            snakeTailRight = ImageIO.read(new File("resources/snakeTailRight.png"));
 
-            apple = ImageIO.read(new File("src/main/java/assets/apple.png"));
-            banana = ImageIO.read(new File("src/main/java/assets/banana.png"));
-            orange = ImageIO.read(new File("src/main/java/assets/orange.png"));
-            pear = ImageIO.read(new File("src/main/java/assets/pear.png"));
+            apple = ImageIO.read(new File("resources/apple.png"));
+            banana = ImageIO.read(new File("resources/banana.png"));
+            orange = ImageIO.read(new File("resources/orange.png"));
+            pear = ImageIO.read(new File("resources/pear.png"));
         } catch (IOException e) {
             // Add error handing here
         }
 
         try {
-            pixelFontLarge = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/assets/terminal-grotesque.ttf"));
+            pixelFontLarge = Font.createFont(Font.TRUETYPE_FONT, new File("resources/terminal-grotesque.ttf"));
             pixelFontLarge = pixelFontLarge.deriveFont(60f); 
             pixelFontSmall = pixelFontLarge.deriveFont(20f);
         } catch (FontFormatException e) {
