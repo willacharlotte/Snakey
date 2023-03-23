@@ -7,10 +7,13 @@ import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Orange;
 import com.bbdsoftware.snakey.domain.Pear;
 import com.bbdsoftware.snakey.domain.Snake;
+import com.bbdsoftware.snakey.enums.Audio;
 import com.bbdsoftware.snakey.enums.CellType;
 import com.bbdsoftware.snakey.enums.Direction;
 import com.bbdsoftware.snakey.enums.FoodTypes;
 import java.util.Random;
+
+import static com.bbdsoftware.snakey.controllers.AudioController.AUDIO_CONTROLLER;
 
 public class BoardController {
     private final int boardSize;
@@ -123,12 +126,14 @@ public class BoardController {
 
             // if contains food
             else if (newHead.getCellType().equals(CellType.FOOD)){
+                AUDIO_CONTROLLER.play(Audio.CRUNCH);
                 mySnake.moveSnake(newHead, this.myFood);
                 this.myFood = null;
             }
 
             // if contains snake
             else if (newHead.getCellType().equals(CellType.SNAKE)){
+                AUDIO_CONTROLLER.play(Audio.DEATH);
                 mySnake.killSnake();
             }
 
@@ -136,6 +141,7 @@ public class BoardController {
             addSnakeToBoard();
         }
         else{
+            AUDIO_CONTROLLER.play(Audio.DEATH);
             mySnake.killSnake();
         }
     }
