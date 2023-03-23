@@ -1,16 +1,15 @@
-package com.bbdsoftware.snakey;
-
+package com.bbdsoftware.snakey.presentation;
 import javax.swing.*;
 
-public class GameBoard extends JFrame {
+public class MenuFrame extends JFrame {
 
-    public GameBoard() {
-        this.add(new GamePanel());
+    public MenuFrame() {
+        this.add(new MenuPanel());
         this.setTitle("Snake");
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
     }
 
-
 }
+

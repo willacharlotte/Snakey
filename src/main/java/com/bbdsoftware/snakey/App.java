@@ -1,10 +1,8 @@
 package com.bbdsoftware.snakey;
-
-import com.bbdsoftware.snakey.presentation.cmdline.Menu;
+import com.bbdsoftware.snakey.presentation.MenuFrame;
 
 public class App {
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.newGame();
+        MenuFrame myMenuBoard = new MenuFrame();
     }
 }

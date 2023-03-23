@@ -1,6 +1,6 @@
 package com.bbdsoftware.snakey.presentation.cmdline;
 
-import com.bbdsoftware.snakey.domain.Board;
+import com.bbdsoftware.snakey.controllers.BoardController;
 import com.bbdsoftware.snakey.domain.Food;
 import com.bbdsoftware.snakey.domain.Snake;
 import com.bbdsoftware.snakey.domain.User;
@@ -15,7 +15,7 @@ import static com.bbdsoftware.snakey.presentation.cmdline.Snakey.*;
 
 public class Menu {
     Scanner myObj = new Scanner(System.in);;  // Create a Scanner object
-    private Board myBoard;
+    private BoardController myBoard;
     private final List<User> users = new ArrayList<>();
 
     public Menu(){ }
@@ -125,7 +125,7 @@ public class Menu {
         if (!this.myBoard.getMySnake().getFoodItems().isEmpty()) {
             System.out.println("Food items eaten: ");
             for (Food food : myBoard.getMySnake().getFoodItems()) {
-                System.out.println("  " + food.getFoodName());
+                System.out.println("  " + food.getFoodType());
             }
         }
     }
@@ -178,7 +178,7 @@ public class Menu {
     private void displayGameEnded() {
         System.out.print("Enter your username: ");
         String username = myObj.nextLine();  // Read user input
-        User new_user = new User(username, this.myBoard.getMySnake().getScore());
+        User new_user = new User(username, (int)this.myBoard.getMySnake().getScore());
         this.users.add(new_user);
 
         System.out.println("High scores: " + this.users);

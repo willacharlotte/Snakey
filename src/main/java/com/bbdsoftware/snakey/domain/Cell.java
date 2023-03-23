@@ -1,18 +1,21 @@
 package com.bbdsoftware.snakey.domain;
 
 import com.bbdsoftware.snakey.enums.CellType;
+import com.bbdsoftware.snakey.enums.Direction;
 
 public class Cell{
     private int x;
     private int y;
     private CellType cellType;
+    private Direction cellDirection;
 
     public Cell(){}
 
-    public Cell(int x, int y){
+    public Cell(int x, int y, Direction cellDirection){
         this.x = x;
         this.y = y;
         this.cellType = CellType.NONE;
+        this.cellDirection = cellDirection;
     }
 
     public void setX(int x){
@@ -27,6 +30,10 @@ public class Cell{
         this.cellType = cellType;
     }
 
+    public void setCellDirection(Direction cellDirection){
+        this.cellDirection = cellDirection;
+    }
+
     public int getX(){
         return this.x;
     }
@@ -36,11 +43,14 @@ public class Cell{
     }
 
     public CellType getCellType() {
-        return cellType;
+        return this.cellType;
     }
 
+    public Direction getCellDirection() {
+        return this.cellDirection;
+    }
+    
     public String toString(){
-        //return "x: " + this.x + ", y: " + this.y;
         return "(" + this.x + ", " + this.y + ", " + this.cellType + ")";
     }
 }

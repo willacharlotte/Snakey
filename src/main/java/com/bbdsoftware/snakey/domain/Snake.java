@@ -1,7 +1,5 @@
 package com.bbdsoftware.snakey.domain;
-
 import com.bbdsoftware.snakey.enums.Direction;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +72,7 @@ public class Snake {
             y += 1;
         }
         this.snakeDirection = direction;
-        return new Cell(x, y);
+        return new Cell(x, y, direction);
     }
 
     /**
@@ -83,7 +81,6 @@ public class Snake {
      */
     public void moveSnake(Cell newCell){
         if (this.isAlive){
-            //System.out.println("snake moves " + direction + " to " + newCell);
             if (this.currentLength < this.length) {
                 this.snakeBlocks.add(newCell);
                 this.head = newCell;
@@ -114,7 +111,10 @@ public class Snake {
     }
 
     public boolean isValidTurn(Direction nextDirection){
-        if (nextDirection.equals(this.snakeDirection)){
+        if(currentLength == 1){
+            return true;
+        }
+        else if (nextDirection.equals(this.snakeDirection)){
             return true;
         }
         else if ((nextDirection.equals(Direction.DOWN) || nextDirection.equals(Direction.UP)) &&
@@ -190,5 +190,4 @@ public class Snake {
                 ", snakeDirection=" + snakeDirection +
                 '}';
     }
-
 }

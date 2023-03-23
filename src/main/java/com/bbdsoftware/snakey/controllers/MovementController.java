@@ -16,17 +16,25 @@ public class MovementController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-           case 87: case 38:
-                snake.setSnakeDirection(Direction.UP);
+            case 87: case 38:
+                if(snake.isValidTurn(Direction.UP)){
+                    snake.setSnakeDirection(Direction.UP);
+                }
                 break;
             case 65: case 37:
-                snake.setSnakeDirection(Direction.LEFT);
+                if(snake.isValidTurn(Direction.LEFT)){
+                    snake.setSnakeDirection(Direction.LEFT);
+                }
                 break;
             case 83: case 40:
-                snake.setSnakeDirection(Direction.DOWN);
+                if(snake.isValidTurn(Direction.DOWN)){
+                    snake.setSnakeDirection(Direction.DOWN);
+                }
                 break;
             case 68: case 39:
-                snake.setSnakeDirection(Direction.RIGHT);
+                if(snake.isValidTurn(Direction.RIGHT)){
+                    snake.setSnakeDirection(Direction.RIGHT);
+                }
                 break; 
         }
     }
