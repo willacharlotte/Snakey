@@ -10,6 +10,5 @@ public class MenuFrame extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-
 }
 

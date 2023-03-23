@@ -102,7 +102,7 @@ public class GameController extends JPanel implements ActionListener {
         draw(g);
     }
 
-    public void draw(Graphics g) {
+    private void draw(Graphics g) {
         int snakeCount = 0;
         for(Cell s : snake.getSnakeBlocks()){
             if(snakeCount == snake.getCurrentLength()-1){
@@ -168,8 +168,7 @@ public class GameController extends JPanel implements ActionListener {
         }
     }
 
-
-    public void gameOver() {
+    private void gameOver() {
         moving = false;
         // TO DO: ADD HIGH SCORE HERE
 
@@ -179,7 +178,7 @@ public class GameController extends JPanel implements ActionListener {
         JTextField nameField = new JTextField(10);
         JButton submitNameButton = new JButton("SUBMIT");
         JButton restartButton = new JButton("RESTART");
-        addEnterUsernameFields(gameOverLabel, nameLabel, nameField, submitNameButton);
+        addEnterUsernameFields(quitButton, gameOverLabel, nameLabel, nameField, submitNameButton);
     
         submitNameButton.setEnabled(false);
 
@@ -222,7 +221,7 @@ public class GameController extends JPanel implements ActionListener {
         });
     }
 
-    private void addEnterUsernameFields(JLabel gameOverLabel, JLabel nameLabel, JTextField nameField, JButton submitNameButton){
+    private void addEnterUsernameFields(JButton quitButton, JLabel gameOverLabel, JLabel nameLabel, JTextField nameField, JButton submitNameButton){
         gameOverLabel.setBounds(0, screenHeight/2-300, screenWidth, 100);
         gameOverLabel.setFont(pixelFontLarge);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -258,6 +257,15 @@ public class GameController extends JPanel implements ActionListener {
         submitNameButton.setBackground(Color.BLACK);
         submitNameButton.setForeground(Color.GREEN); 
         add(submitNameButton);
+
+        quitButton.setBounds(screenWidth/2-150, screenHeight/2, 300, 80);
+        quitButton.setFont(pixelFontLarge);
+        quitButton.setHorizontalAlignment(SwingConstants.CENTER);
+        quitButton.setVerticalAlignment(SwingConstants.CENTER);
+        quitButton.setOpaque(true);
+        quitButton.setBackground(Color.BLACK);
+        quitButton.setForeground(Color.GREEN); 
+        add(quitButton);
     }
 
 
@@ -281,7 +289,6 @@ public class GameController extends JPanel implements ActionListener {
         add(quitButton);
     }
 
-    
     private void removeJFrameComponent(JButton... buttons){
         for (JButton jButton : buttons) {
             remove(jButton);            
@@ -299,6 +306,7 @@ public class GameController extends JPanel implements ActionListener {
             remove(jTextField);
         }
     }
+
     private void closeParentFrame(){
         final Window parentWindow = SwingUtilities.getWindowAncestor(this);
         parentWindow.dispose();
