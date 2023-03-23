@@ -46,6 +46,7 @@ public class GameController extends JPanel implements ActionListener {
     BufferedImage snakeTailUp, snakeTailDown, snakeTailLeft, snakeTailRight;
     BufferedImage apple, banana, pear, orange;
     Font pixelFontLarge, pixelFontSmall;
+    JLabel[] foodLabels = new JLabel[5];
 
     public GameController() {
         snake = board.getMySnake();
@@ -101,6 +102,12 @@ public class GameController extends JPanel implements ActionListener {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        foodLabels[0] = new JLabel("SCORE: 0");
+        foodLabels[1] = new JLabel(" x 0");
+        foodLabels[2] = new JLabel(" x 0");
+        foodLabels[3] = new JLabel(" x 0");
+        foodLabels[4] = new JLabel(" x 0");
     }
     
     public void paintComponent(Graphics g) {
@@ -175,40 +182,49 @@ public class GameController extends JPanel implements ActionListener {
                     break;
             }
         }
-   
-        int foodScoreX = 50;
+
+        foodLabels[0].setText("SCORE: " + snake.getScore());
+        foodLabels[0].setBounds(screenWidth-150, 25, 150, 50);
+        foodLabels[0].setFont(pixelFontSmall);
+        foodLabels[0].setHorizontalAlignment(SwingConstants.LEFT);
+        foodLabels[0].setVerticalAlignment(SwingConstants.CENTER);
+        foodLabels[0].setOpaque(false);
+        foodLabels[0].setForeground(Color.GREEN);
+        add(foodLabels[0]);
+
+        int foodPos = 1;
         for(FoodTypes f : FoodTypes.values()){
             switch(f){
                 case APPLE:
-                    g.drawImage(apple, foodScoreX, 25, blockUnit, blockUnit, null);
+                    foodPos = 1;
+                    g.drawImage(apple, foodPos*105-75, 25, blockUnit, blockUnit, null);
                     break;
                 case BANANA:
-                    g.drawImage(banana, foodScoreX, 25, blockUnit, blockUnit, null);
+                    foodPos = 2;
+                    g.drawImage(banana, foodPos*105-75, 25, blockUnit, blockUnit, null);
                     break;
                 case PEAR:
-                    g.drawImage(pear, foodScoreX, 25, blockUnit, blockUnit, null);
+                    foodPos = 3;
+                    g.drawImage(pear, foodPos*105-75, 25, blockUnit, blockUnit, null);
                     break;
                 case ORANGE:
-                    g.drawImage(orange, foodScoreX, 25, blockUnit, blockUnit, null);
+                    foodPos = 4;
+                    g.drawImage(orange, foodPos*105-75, 25, blockUnit, blockUnit, null);
                     break;
             }
-            foodScoreX+=50;
-            JLabel foodLabel = new JLabel(" x 0");
-            foodLabel.setBounds(foodScoreX, 25, 50, 50);
-            foodLabel.setFont(pixelFontSmall);
-            foodLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            foodLabel.setVerticalAlignment(SwingConstants.CENTER);
-            foodLabel.setOpaque(false);
-            foodLabel.setForeground(Color.GREEN);
-            add(foodLabel);
-            foodScoreX += 100;
+            foodLabels[foodPos].setText(" x " + snake.getFoodItemCount(f));
+            foodLabels[foodPos].setBounds(foodPos*105-35, 25, 50, 50);
+            foodLabels[foodPos].setFont(pixelFontSmall);
+            foodLabels[foodPos].setHorizontalAlignment(SwingConstants.CENTER);
+            foodLabels[foodPos].setVerticalAlignment(SwingConstants.CENTER);
+            foodLabels[foodPos].setOpaque(false);
+            foodLabels[foodPos].setForeground(Color.GREEN);
+            add(foodLabels[foodPos]);
         }
     }
 
     private void gameOver() {
         moving = false;
-        // TO DO: ADD HIGH SCORE HERE
-
         JButton quitButton = new JButton("QUIT");
         JLabel gameOverLabel = new JLabel("Game Over");
         JLabel nameLabel = new JLabel("ENTER YOUR NAME:");
@@ -217,8 +233,6 @@ public class GameController extends JPanel implements ActionListener {
         JButton restartButton = new JButton("RESTART");
         JLabel scoreLabel = new JLabel("SCORE: " + snake.getScore());
         addEnterUsernameFields(scoreLabel, quitButton, gameOverLabel, nameLabel, nameField, submitNameButton);
-        //addFoodScoreFields();
-
         submitNameButton.setEnabled(false);
 
         nameField.addKeyListener(new KeyAdapter() {
