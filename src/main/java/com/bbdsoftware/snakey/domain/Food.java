@@ -1,6 +1,6 @@
 package com.bbdsoftware.snakey.domain;
-
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import com.bbdsoftware.snakey.enums.FoodTypes;
 
 public abstract class Food{
@@ -21,6 +21,8 @@ public abstract class Food{
     }
 
     public abstract void doSpecial(Snake snake);
+
+    public abstract BufferedImage applyImageEffect(BufferedImage image);
 
     public FoodTypes getFoodType() {
         return foodType;

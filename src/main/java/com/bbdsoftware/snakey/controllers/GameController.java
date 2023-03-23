@@ -11,8 +11,6 @@ import com.bbdsoftware.snakey.presentation.MenuFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +22,6 @@ import java.io.IOException;
 import java.util.Random;
 
 public class GameController extends JPanel implements ActionListener {
-
     static final int numBlocks = 13;
     static final int blockUnit = 50;
     static final int snakeUnit = 50;
@@ -88,7 +85,7 @@ public class GameController extends JPanel implements ActionListener {
             orange = ImageIO.read(new File("resources/orange.png"));
             pear = ImageIO.read(new File("resources/pear.png"));
         } catch (IOException e) {
-            // Add error handing here
+            System.out.println("ERROR LOADING RESOURCES!");
         }
 
         try {
@@ -96,10 +93,10 @@ public class GameController extends JPanel implements ActionListener {
             pixelFontLarge = pixelFontLarge.deriveFont(60f); 
             pixelFontSmall = pixelFontLarge.deriveFont(20f);
         } catch (FontFormatException e) {
-            // TODO Auto-generated catch block
+            System.out.println("ERROR LOADING RESOURCES!");
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            System.out.println("ERROR LOADING RESOURCES!");
             e.printStackTrace();
         }
 
@@ -169,15 +166,19 @@ public class GameController extends JPanel implements ActionListener {
         if(foodItem != null){
             switch(foodItem.getFoodType()){
                 case APPLE:
+                    foodItem.applyImageEffect(apple);
                     g.drawImage(apple, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
                 case BANANA:
+                    foodItem.applyImageEffect(banana);
                     g.drawImage(banana, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
                 case PEAR:
+                    foodItem.applyImageEffect(pear);
                     g.drawImage(pear, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
                 case ORANGE:
+                    foodItem.applyImageEffect(orange);
                     g.drawImage(orange, foodItem.getFoodCell().getX()*blockUnit, foodItem.getFoodCell().getY()*blockUnit+headingOffsetY, snakeUnit, snakeUnit, null);
                     break;
             }
@@ -254,7 +255,6 @@ public class GameController extends JPanel implements ActionListener {
             addEndOfGameFields(restartButton, quitButton);
             repaint();
 
-
              //Add username + score to DB here
             String userName= nameField.getText().toLowerCase();
             int userScore= snake.getScore();
@@ -263,7 +263,6 @@ public class GameController extends JPanel implements ActionListener {
             DatabaseController db = new DatabaseController();
             db.addScore(user);
             new LeaderboardFrame(user);
-            
         });
 
         restartButton.addActionListener(e -> {
@@ -271,8 +270,6 @@ public class GameController extends JPanel implements ActionListener {
             closeParentFrame();
         });
 
- 
-        
         quitButton.addActionListener(e -> {
             new MenuFrame();
             closeParentFrame();
