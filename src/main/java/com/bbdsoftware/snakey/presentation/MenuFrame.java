@@ -12,6 +12,5 @@ public class MenuFrame extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 }
 
