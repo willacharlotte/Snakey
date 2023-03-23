@@ -26,7 +26,7 @@ public abstract class Food{
         return foodType;
     }
 
-    public float getScore() {
+    public int getScore() {
         return score;
     }
 
