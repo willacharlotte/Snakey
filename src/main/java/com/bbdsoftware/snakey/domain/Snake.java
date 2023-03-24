@@ -146,6 +146,8 @@ public class Snake {
         this.length += food.getLength();
         this.score += food.getScore();
         this.foodItems.add(food);
+
+        food.doSpecial(this);
     }
 
     /**

@@ -1,7 +1,12 @@
 package com.bbdsoftware.snakey.domain;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+
+import com.bbdsoftware.snakey.enums.Audio;
 import com.bbdsoftware.snakey.enums.FoodTypes;
+
+import static com.bbdsoftware.snakey.controllers.AudioController.AUDIO_CONTROLLER;
+
 public class Banana  extends Food{
     private boolean initial = false;
     private boolean switcher = false;
@@ -13,7 +18,7 @@ public class Banana  extends Food{
 
     @Override
     public void doSpecial(Snake snake) {
-
+        AUDIO_CONTROLLER.play(Audio.CRUNCH_BANANA);
     }
 
     @Override

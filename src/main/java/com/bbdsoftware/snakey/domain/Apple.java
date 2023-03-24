@@ -2,7 +2,11 @@ package com.bbdsoftware.snakey.domain;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+
+import com.bbdsoftware.snakey.enums.Audio;
 import com.bbdsoftware.snakey.enums.FoodTypes;
+
+import static com.bbdsoftware.snakey.controllers.AudioController.AUDIO_CONTROLLER;
 
 public class Apple extends Food{
     private Random random = new Random();
@@ -16,7 +20,7 @@ public class Apple extends Food{
 
     @Override
     public void doSpecial(Snake snake) {
- 
+        AUDIO_CONTROLLER.play(Audio.CRUNCH_APPLE);
     }
 
     @Override
