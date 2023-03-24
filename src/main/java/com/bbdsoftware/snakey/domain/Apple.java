@@ -20,7 +20,7 @@ public class Apple extends Food{
 
     @Override
     public void doSpecial(Snake snake) {
-        AUDIO_CONTROLLER.play(Audio.CRUNCH_BANANA);
+        AUDIO_CONTROLLER.play(Audio.CRUNCH_APPLE);
     }
 
     @Override
