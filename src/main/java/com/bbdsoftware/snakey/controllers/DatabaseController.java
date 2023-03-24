@@ -39,7 +39,7 @@ public class DatabaseController {
      * Adds score to database
      * @param user
      */
-    public void AddPlayerRecord(User user) {
+    public void addScore(User user) {
         Connection conn = DBConnect();
         String name=user.getUsername();
         Integer score=user.getScore();
@@ -60,12 +60,12 @@ public class DatabaseController {
      * Gets the top 10 scores
      * @return
      */
-    public LinkedHashMap<String, Integer> GetPlayerRecord() {
+    public LinkedHashMap<String, Integer> GetScores() {
         Connection conn = DBConnect();
         LinkedHashMap<String, Integer> scores = new LinkedHashMap<>();
         try {
             statement = conn.createStatement();
-            results = statement.executeQuery("Select *, ROW_NUMBER() OVER (ORDER BY score DESC) RowNumber FROM Leaderboard");
+            results = statement.executeQuery("Select  TOP(10) *, ROW_NUMBER() OVER (ORDER BY score DESC) RowNumber FROM Leaderboard");
             while (results.next()) {
                scores.put(results.getString(2), results.getInt("score"));
             }
@@ -89,6 +89,7 @@ public class DatabaseController {
             statement = conn.createStatement();
             results = statement.executeQuery("Select *,ROW_NUMBER() OVER (ORDER BY score DESC) RowNumber from Leaderboard");
             while (results.next()) {
+                System.out.println("user is "+results.getString(2));
                 if (results.getString(2).equalsIgnoreCase(name)){
                     rowCount = results.getInt("RowNumber");
                 }

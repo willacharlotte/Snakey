@@ -58,9 +58,12 @@ public class GameController extends JPanel implements ActionListener {
 
         loadResources();
         timer.start();
-        moving = true;
+        startGame();
     }
 
+    private void startGame() {
+        moving = true;
+    }
 
     private void loadResources(){
         try {
@@ -252,24 +255,20 @@ public class GameController extends JPanel implements ActionListener {
             addEndOfGameFields(restartButton, quitButton);
             repaint();
 
-
              //Add username + score to DB here
             String userName= nameField.getText().toLowerCase();
             int userScore= snake.getScore();
 
             User user= new User(userName,userScore);
             DatabaseController db = new DatabaseController();
-            db.AddPlayerRecord(user);
+            db.addScore(user);
             new LeaderboardFrame(user);
-
         });
 
         restartButton.addActionListener(e -> {
             new GameFrame();
             closeParentFrame();
         });
-
-
 
         quitButton.addActionListener(e -> {
             new MenuFrame();
@@ -333,9 +332,8 @@ public class GameController extends JPanel implements ActionListener {
         add(quitButton);
     }
 
-
     private void addEndOfGameFields(JButton restartButton, JButton quitButton){
-        restartButton.setBounds(screenWidth/2-200, screenHeight/2+50, 400, 100);
+        restartButton.setBounds(screenWidth/2-200, screenHeight/2-175, 400, 100);
         restartButton.setFont(pixelFontLarge);
         restartButton.setHorizontalAlignment(SwingConstants.CENTER);
         restartButton.setVerticalAlignment(SwingConstants.CENTER);
@@ -344,7 +342,7 @@ public class GameController extends JPanel implements ActionListener {
         restartButton.setForeground(Color.GREEN);  
         add(restartButton);
 
-        quitButton.setBounds(screenWidth/2-200, screenHeight/2+200, 400, 100);
+        quitButton.setBounds(screenWidth/2-200, screenHeight/2-50, 400, 100);
         quitButton.setFont(pixelFontLarge);
         quitButton.setHorizontalAlignment(SwingConstants.CENTER);
         quitButton.setVerticalAlignment(SwingConstants.CENTER);
@@ -379,25 +377,13 @@ public class GameController extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (moving){
-            if (snake.isAlive()) {
+        if (moving) {
+            if(snake.isAlive()){
                 board.processSnakeMovement(snake.getSnakeDirection());
-
-//                if (snake.getLength() < 15) {
-//                    timer.setDelay(speed);
-//                } else if (snake.getLength() < 25) {
-//                    timer.setDelay(speed - 100);
-//                } else if (snake.getLength() < 50) {
-//                    timer.setDelay(speed - 150);
-//                } else {
-//                    timer.setDelay(speed - 200);
-//                }
-
-            } else {
+            }else{
                 gameOver();
             }
+            repaint();
         }
-
-        repaint();
     }
 }
