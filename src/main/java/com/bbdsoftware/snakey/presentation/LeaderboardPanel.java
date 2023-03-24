@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeaderboardPanel extends JPanel {
     static final int screenWidth = 600;
@@ -26,79 +27,69 @@ public class LeaderboardPanel extends JPanel {
 
         DatabaseController db = new DatabaseController();
         if (user != null) {
-            DisplayScores(db.GetScores(), user);
+            DisplayScores(db.GetPlayerRecord(), user);
         } else {
-            DisplayScores(db.GetScores());
+            DisplayScores(db.GetPlayerRecord());
         }
 
     }
 
 
     /**
-     *
      * @param scores Takes in hashmap from db.getscores
-     * @param user Takes in user from User class
+     * @param user   Takes in user from User class
      */
     private void DisplayScores(HashMap<String, Integer> scores, User user) {
         JLabel recordLabel;
-        int count = 0;
-        int userIndex=-1;
-        List<String> names = new ArrayList<>();
-        List<Integer> scoreList = new ArrayList<>();
+        List<String> nameList;
+        DatabaseController db = new DatabaseController();
 
-        for (Map.Entry<String, Integer> entry : scores.entrySet()) {
-            names.add(entry.getKey());
-            scoreList.add(entry.getValue());
-
-            recordLabel = new JLabel((count + 1) + ". " + names.get(count) + " " + scoreList.get(count));
+        nameList = scores.keySet().stream().limit(10).collect(Collectors.toList());
+        for (int i = 0; i <= nameList.size() - 1; i++) {
+            System.out.println(nameList.get(i) + "  " + scores.get(nameList.get(i)));
+            recordLabel = new JLabel((i + 1) + ". " + nameList.get(i) + " " + scores.get(nameList.get(i)));
             recordLabel.setHorizontalAlignment(JLabel.LEFT);
             recordLabel.setFont(new Font("Verdana", Font.PLAIN, 30));
             recordLabel.setPreferredSize(new Dimension(300, 40));
             recordLabel.setForeground(new Color(255, 255, 255));
 
-            if ((user.getUsername()).equalsIgnoreCase(entry.getKey())) {
+            if ((user.getUsername()).equalsIgnoreCase(nameList.get(i))) {
                 recordLabel.setForeground(new Color(8, 168, 13));
-                userIndex = count;
             }
-            count++;
+
             add(recordLabel);
         }
 
-        if (userIndex==-1){
-            DatabaseController db = new DatabaseController();
+        if (nameList.stream().noneMatch(e -> e.equalsIgnoreCase(user.getUsername()))) {
             int rowCount = db.GetUserRow(user);
-            System.out.println("rowCount "+rowCount);
-            recordLabel = new JLabel((rowCount) + ". " + user.getUsername()+ " " + user.getScore());
+            recordLabel = new JLabel((rowCount) + ". " + user.getUsername() + " " + user.getScore());
             recordLabel.setHorizontalAlignment(JLabel.LEFT);
             recordLabel.setFont(new Font("Verdana", Font.PLAIN, 30));
             recordLabel.setPreferredSize(new Dimension(300, 40));
             recordLabel.setForeground(new Color(255, 0, 0));
-        add(recordLabel);
+            add(recordLabel);
         }
     }
 
+
     /**
      * Display scores without user
+     *
      * @param scores Takes in hashmap from db.getscores
      */
     private void DisplayScores(HashMap<String, Integer> scores) {
         JLabel recordLabel;
-        List<String> names = new ArrayList<>();
-        List<Integer> scoreList = new ArrayList<>();
-        int count = 0;
+        List<String> nameList;
 
-        for (Map.Entry<String, Integer> entry : scores.entrySet()) {
-            names.add(entry.getKey());
-            scoreList.add(entry.getValue());
+        nameList = scores.keySet().stream().limit(10).collect(Collectors.toList());
+        for (int i = 0; i <= nameList.size() - 1; i++) {
 
-            recordLabel = new JLabel((count + 1) + ". " + names.get(count) + " " + scoreList.get(count));
+            recordLabel = new JLabel((i + 1) + ". " + nameList.get(i) + " " + scores.get(nameList.get(i)));
             recordLabel.setHorizontalAlignment(JLabel.LEFT);
             recordLabel.setFont(new Font("Verdana", Font.PLAIN, 30));
             recordLabel.setPreferredSize(new Dimension(300, 40));
             recordLabel.setForeground(new Color(255, 255, 255));
-
             add(recordLabel);
-            count++;
         }
     }
 
