@@ -126,7 +126,6 @@ public class BoardController {
 
             // if contains food
             else if (newHead.getCellType().equals(CellType.FOOD)){
-                AUDIO_CONTROLLER.play(Audio.CRUNCH);
                 mySnake.moveSnake(newHead, this.myFood);
                 this.myFood = null;
             }

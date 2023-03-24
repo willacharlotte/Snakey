@@ -6,7 +6,10 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
 public enum Audio {
-    CRUNCH("crunch.wav"),
+    CRUNCH_APPLE("crunch_apple.wav"),
+    CRUNCH_BANANA("crunch_banana.wav"),
+    CRUNCH_PEAR("crunch_pear.wav"),
+    CRUNCH_ORANGE("crunch_orange.wav"),
     DEATH("death.wav");
 
     private String fileName;
