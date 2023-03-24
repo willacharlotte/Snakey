@@ -46,7 +46,6 @@ public class LeaderboardPanel extends JPanel {
 
         nameList = scores.keySet().stream().limit(10).collect(Collectors.toList());
         for (int i = 0; i <= nameList.size() - 1; i++) {
-            System.out.println(nameList.get(i) + "  " + scores.get(nameList.get(i)));
             recordLabel = new JLabel((i + 1) + ". " + nameList.get(i) + " " + scores.get(nameList.get(i)));
             recordLabel.setHorizontalAlignment(JLabel.LEFT);
             recordLabel.setFont(new Font("Verdana", Font.PLAIN, 30));
@@ -82,6 +81,7 @@ public class LeaderboardPanel extends JPanel {
         List<String> nameList;
 
         nameList = scores.keySet().stream().limit(10).collect(Collectors.toList());
+
         for (int i = 0; i <= nameList.size() - 1; i++) {
 
             recordLabel = new JLabel((i + 1) + ". " + nameList.get(i) + " " + scores.get(nameList.get(i)));
